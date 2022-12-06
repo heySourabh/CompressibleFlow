@@ -1,13 +1,13 @@
 package in.spbhat.gas;
 
-import in.spbhat.gas.constants.GasConstant;
+import in.spbhat.gas.constants.R;
 
-import static in.spbhat.gas.constants.GasConstant.Units.J_kgK;
+import static in.spbhat.gas.constants.SpecificHeatUnits.J_kgK;
 
 public class Air implements Gas {
     @Override
-    public GasConstant R() {
-        return new GasConstant(287.0, J_kgK);
+    public R R() {
+        return new R(287.0, J_kgK);
     }
 
     @Override
