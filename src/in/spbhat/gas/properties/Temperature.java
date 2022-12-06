@@ -58,6 +58,11 @@ public class Temperature {
         abstract double toKelvin(double value);
 
         abstract double fromKelvin(double K);
+
+        @Override
+        public String toString() {
+            return unitString;
+        }
     }
 
     private final double temperature;
@@ -81,7 +86,7 @@ public class Temperature {
     @Override
     public String toString() {
         String temperatureStr = Formatter.doubleToString(this.temperature);
-        return temperatureStr + "" + this.units.unitString;
+        return temperatureStr + "" + this.units;
     }
 
     public static void main(String[] args) {
