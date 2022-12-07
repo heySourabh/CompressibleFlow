@@ -4,14 +4,14 @@ import in.spbhat.gas.constants.MolarMass;
 
 import static in.spbhat.gas.constants.MolarMass.Units.moles_gram;
 
-public class Air implements Gas {
+public class Freon12 implements Gas {
     @Override
     public double gamma() {
-        return 1.404;
+        return 1.139;
     }
 
     @Override
     public MolarMass molarMass() {
-        return new MolarMass(28.960, moles_gram);
+        return new MolarMass(120.9, moles_gram);
     }
 }
