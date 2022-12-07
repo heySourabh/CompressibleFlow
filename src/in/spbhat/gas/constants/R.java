@@ -1,25 +1,7 @@
 package in.spbhat.gas.constants;
 
-import in.spbhat.util.Formatter;
-
-public class R {
-    private final double value;
-    private final SpecificHeatUnits unit;
-
-    public R(double value, SpecificHeatUnits unit) {
-        this.value = value;
-        this.unit = unit;
-    }
-
-    public double in(SpecificHeatUnits units) {
-        if (units != SpecificHeatUnits.J_kgK) {
-            throw new IllegalArgumentException("Not implemented yet!");
-        }
-        return this.value;
-    }
-
-    @Override
-    public String toString() {
-        return Formatter.doubleToString(this.value) + " " + this.unit;
+public class R extends SpecificHeat {
+    public R(double value, Units units) {
+        super(value, units);
     }
 }

@@ -4,7 +4,7 @@ import in.spbhat.gas.constants.Cp;
 import in.spbhat.gas.constants.Cv;
 import in.spbhat.gas.constants.R;
 
-import static in.spbhat.gas.constants.SpecificHeatUnits.J_kgK;
+import static in.spbhat.gas.constants.SpecificHeat.Units.J_kgK;
 
 public interface Gas {
     R R();

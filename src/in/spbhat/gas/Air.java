@@ -2,7 +2,7 @@ package in.spbhat.gas;
 
 import in.spbhat.gas.constants.R;
 
-import static in.spbhat.gas.constants.SpecificHeatUnits.J_kgK;
+import static in.spbhat.gas.constants.SpecificHeat.Units.J_kgK;
 
 public class Air implements Gas {
     @Override
