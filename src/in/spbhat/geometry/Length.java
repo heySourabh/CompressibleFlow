@@ -1,8 +1,8 @@
-package in.spbhat.physics;
+package in.spbhat.geometry;
 
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.physics.Length.Units.*;
+import static in.spbhat.geometry.Length.Units.*;
 
 public class Length {
     enum Units {
