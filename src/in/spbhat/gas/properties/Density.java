@@ -2,16 +2,22 @@ package in.spbhat.gas.properties;
 
 import in.spbhat.util.Formatter;
 
+import static in.spbhat.gas.properties.Density.Units.kg_m3;
+import static in.spbhat.gas.properties.Density.Units.pound_ft3;
+
 public class Density {
     private final double value;
     private final Units units;
 
     public enum Units {
-        kg_m3("kg/m^3");
+        kg_m3(1.0, "kg/m^3"),
+        pound_ft3(16.01846337, "lbm/ft^3");
 
+        private final double conversion;
         private final String unitStr;
 
-        Units(String unitStr) {
+        Units(double conversion, String unitStr) {
+            this.conversion = conversion;
             this.unitStr = unitStr;
         }
 
@@ -27,10 +33,12 @@ public class Density {
     }
 
     public double in(Units units) {
-        if (units != Units.kg_m3) {
-            throw new IllegalArgumentException("Not implemented yet!");
-        }
-        return value;
+        double density_kg_m3 = this.value * this.units.conversion;
+        return density_kg_m3 / units.conversion;
+    }
+
+    public Density to(Units units) {
+        return new Density(in(units), units);
     }
 
     @Override
@@ -39,8 +47,10 @@ public class Density {
     }
 
     public static void main(String[] args) {
-        Density density = new Density(10.5798789, Units.kg_m3);
+        Density density = new Density(10.5798789, kg_m3);
         System.out.println(density);
-        System.out.println(density.in(Units.kg_m3));
+        System.out.println(density.in(kg_m3));
+        System.out.println(new Density(541.45, pound_ft3).to(kg_m3));
+        System.out.println(new Density(45.7, kg_m3).to(pound_ft3));
     }
 }
