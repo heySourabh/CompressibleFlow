@@ -1,9 +1,13 @@
 package in.spbhat.gas.properties;
 
+import in.spbhat.geometry.Volume;
+import in.spbhat.physics.Mass;
 import in.spbhat.util.Formatter;
 
 import static in.spbhat.gas.properties.Density.Units.kg_m3;
 import static in.spbhat.gas.properties.Density.Units.pound_ft3;
+import static in.spbhat.geometry.Volume.Units.cubic_m;
+import static in.spbhat.physics.Mass.Units.kg;
 
 public class Density {
     private final double value;
@@ -41,6 +45,10 @@ public class Density {
         return new Density(in(units), units);
     }
 
+    public static Density calculateDensity(Mass mass, Volume volume) {
+        return new Density(mass.in(kg) / volume.in(cubic_m), kg_m3);
+    }
+
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;
@@ -52,5 +60,7 @@ public class Density {
         System.out.println(density.in(kg_m3));
         System.out.println(new Density(541.45, pound_ft3).to(kg_m3));
         System.out.println(new Density(45.7, kg_m3).to(pound_ft3));
+
+        System.out.println(Density.calculateDensity(new Mass(1.5, kg), new Volume(0.5, cubic_m)));
     }
 }
