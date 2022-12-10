@@ -15,7 +15,7 @@ public class Temperature {
                 return K;
             }
         },
-        C("\u00B0C") {
+        C("°C") {
             @Override
             double toKelvin(double C) {
                 return C + 273.15;
@@ -26,7 +26,7 @@ public class Temperature {
                 return K - 273.15;
             }
         },
-        F("\u00B0F") {
+        F("°F") {
             @Override
             double toKelvin(double F) {
                 return (F - 32) * 5.0 / 9.0 + 273.15;
@@ -37,7 +37,7 @@ public class Temperature {
                 return (K - 273.15) * 9.0 / 5.0 + 32;
             }
         },
-        R("\u00B0R") {
+        R("°R") {
             @Override
             double toKelvin(double R) {
                 return R * 5.0 / 9.0;
