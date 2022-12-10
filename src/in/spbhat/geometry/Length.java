@@ -23,12 +23,12 @@ public class Length {
         this.units = units;
     }
 
-    double in(Units units) {
+    public double in(Units units) {
         double length_m = this.value * this.units.conversion;
         return length_m / units.conversion;
     }
 
-    Length to(Units units) {
+    public Length to(Units units) {
         return new Length(in(units), units);
     }
 
