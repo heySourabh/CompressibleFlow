@@ -5,7 +5,7 @@ import in.spbhat.util.Formatter;
 import static in.spbhat.geometry.Length.Units.*;
 
 public class Length {
-    enum Units {
+    public enum Units {
         m(1.0), km(1e3), cm(1e-2), ft(0.3048), inches(0.0254);
 
         private final double conversion;

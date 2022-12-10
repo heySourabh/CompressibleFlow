@@ -6,7 +6,7 @@ import static in.spbhat.geometry.Area.Units.*;
 
 public class Area {
 
-    enum Units {
+    public enum Units {
         sq_m(1.0, "m^2"),
         sq_mm(1e-6, "mm^2"),
         sq_cm(1e-4, "cm^2"),

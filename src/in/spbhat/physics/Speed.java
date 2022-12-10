@@ -5,7 +5,7 @@ import in.spbhat.util.Formatter;
 import static in.spbhat.physics.Speed.Units.*;
 
 public class Speed {
-    enum Units {
+    public enum Units {
         m_s(1.0, "m/s"),
         km_h(1.0 / 3.6, "km/h"),
         ft_s(0.3048, "ft/s");

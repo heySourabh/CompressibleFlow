@@ -6,7 +6,7 @@ import static in.spbhat.physics.Force.Units.N;
 import static in.spbhat.physics.Force.Units.pound_force;
 
 public class Force {
-    enum Units {
+    public enum Units {
         N(1.0, "N"),
         pound_force(4.4482216152605, "lbf");
 

@@ -6,7 +6,7 @@ import static in.spbhat.geometry.Volume.Units.*;
 import static java.lang.Math.pow;
 
 public class Volume {
-    enum Units {
+    public enum Units {
         cubic_m(1.0, "m^3"),
         cubic_mm(1e-9, "mm^3"),
         cubic_cm(1e-6, "cm^3"),
