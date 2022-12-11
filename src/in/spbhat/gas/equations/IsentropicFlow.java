@@ -54,6 +54,12 @@ public class IsentropicFlow {
         return totalPressure.divide(p0_p);
     }
 
+    public double A_by_ACritical(Mach mach) {
+        double T0_T = T0_by_T(mach);
+        double M = mach.machNumber();
+        return 1.0 / M * pow(2.0 / (gamma + 1) * T0_T, (gamma + 1) / 2.0 / (gamma - 1));
+    }
+
     public static void main(String[] args) {
         IsentropicFlow isentropic = new IsentropicFlow(new Air());
         System.out.println(isentropic.p2(new Pressure(101325, Pa), 1.2));
@@ -65,5 +71,11 @@ public class IsentropicFlow {
         System.out.println(isentropic.T(new Mach(2), T0));
         Pressure p0 = new Pressure(100, bar);
         System.out.println(isentropic.p(new Mach(0.7), p0));
+
+        Mach machSubsonic = new Mach(0.1);
+        Mach machSupersonic = new Mach(2.5);
+
+        System.out.println(isentropic.A_by_ACritical(machSubsonic));
+        System.out.println(isentropic.A_by_ACritical(machSupersonic));
     }
 }
