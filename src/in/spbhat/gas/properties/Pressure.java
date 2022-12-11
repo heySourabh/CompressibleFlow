@@ -2,6 +2,10 @@ package in.spbhat.gas.properties;
 
 import in.spbhat.util.Formatter;
 
+import java.util.List;
+
+import static in.spbhat.gas.properties.Pressure.Units.*;
+
 public class Pressure {
     public enum Units {
         Pa(1), kPa(1e3), MPa(1e6),
@@ -31,34 +35,44 @@ public class Pressure {
         return new Pressure(in(units), units);
     }
 
+    public Pressure times(double ratio) {
+        return new Pressure(value * ratio, units);
+    }
+
     @Override
     public String toString() {
-        double pressure_Pa = this.value * this.units.conversion;
-        Units units;
-        if (pressure_Pa > 1e6) {
-            units = Units.MPa;
-        } else if (pressure_Pa > 1e3) {
-            units = Units.kPa;
+        if (List.of(MPa, kPa, Pa).contains(this.units)) {
+            double pressure_Pa = this.value * this.units.conversion;
+            Units units;
+            if (pressure_Pa > 1e6) {
+                units = MPa;
+            } else if (pressure_Pa > 1e3) {
+                units = kPa;
+            } else {
+                units = Pa;
+            }
+            return Formatter.doubleToString(in(units)) + " " + units;
         } else {
-            units = Units.Pa;
+            return Formatter.doubleToString(this.value) + " " + this.units;
         }
-        return Formatter.doubleToString(in(units)) + " " + units;
     }
 
     public static void main(String[] args) {
-        Pressure inletPressure = new Pressure(0.5, Units.MPa);
+        Pressure inletPressure = new Pressure(0.5, MPa);
         System.out.println(inletPressure);
 
-        Pressure outletPressure = new Pressure(550, Units.psi);
+        Pressure outletPressure = new Pressure(550, psi);
         System.out.println(outletPressure);
 
-        Pressure somePressure = new Pressure(0.10001, Units.bar);
+        Pressure somePressure = new Pressure(0.10001, bar);
         System.out.println(somePressure);
 
-        Pressure anyPressure = new Pressure(1, Units.atm);
+        Pressure anyPressure = new Pressure(1, atm);
         System.out.println(anyPressure);
 
-        Pressure lowPressure = new Pressure(0.5, Units.kPa);
+        Pressure lowPressure = new Pressure(0.5, kPa);
         System.out.println(lowPressure);
+
+        System.out.println(lowPressure.times(2));
     }
 }
