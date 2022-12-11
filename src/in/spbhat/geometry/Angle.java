@@ -54,9 +54,10 @@ public class Angle {
 
     @Override
     public String toString() {
-        double value = (this.units == radians) ? this.value / Math.PI : this.value;
-        String unitStr = (this.units == radians) ? "π rad" : this.units.unitStr;
-        return Formatter.doubleToString(value) + unitStr;
+        if (this.units == radians)
+            return Formatter.doubleToString(this.value / Math.PI) + "π rad";
+        else
+            return Formatter.doubleToString(this.value) + this.units.unitStr;
     }
 
     public static void main(String[] args) {
