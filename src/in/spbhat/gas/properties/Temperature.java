@@ -83,6 +83,10 @@ public class Temperature {
         return new Temperature(units.fromKelvin(temperature_K), units);
     }
 
+    public Temperature times(double ratio) {
+        return new Temperature(in(Units.K) * ratio, Units.K);
+    }
+
     @Override
     public String toString() {
         String temperatureStr = Formatter.doubleToString(this.temperature);
