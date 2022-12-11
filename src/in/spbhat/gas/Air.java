@@ -1,13 +1,20 @@
 package in.spbhat.gas;
 
 import in.spbhat.gas.constants.MolarMass;
+import in.spbhat.gas.constants.R;
+import in.spbhat.gas.constants.SpecificHeat;
 
 import static in.spbhat.gas.constants.MolarMass.Units.moles_gram;
 
 public class Air implements Gas {
     @Override
     public double gamma() {
-        return 1.404;
+        return 1.4;
+    }
+
+    @Override
+    public R R() {
+        return new R(287.0, SpecificHeat.Units.J_kgK);
     }
 
     @Override
