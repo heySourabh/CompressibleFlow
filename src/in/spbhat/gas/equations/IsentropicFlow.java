@@ -5,11 +5,17 @@ import in.spbhat.gas.Gas;
 import in.spbhat.gas.properties.Pressure;
 import in.spbhat.gas.properties.Temperature;
 import in.spbhat.physics.Mach;
+import in.spbhat.physics.Mach.MachRegime;
+import in.spbhat.util.Numerical.Function;
 
 import static in.spbhat.gas.properties.Pressure.Units.Pa;
 import static in.spbhat.gas.properties.Pressure.Units.bar;
 import static in.spbhat.gas.properties.Temperature.Units.C;
+import static in.spbhat.physics.Mach.MachRegime.Subsonic;
+import static in.spbhat.physics.Mach.MachRegime.Supersonic;
+import static in.spbhat.util.Numerical.solveNewtonRaphson;
 import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 public class IsentropicFlow {
     private final double gamma;
@@ -60,6 +66,26 @@ public class IsentropicFlow {
         return 1.0 / M * pow(2.0 / (gamma + 1) * T0_T, (gamma + 1) / 2.0 / (gamma - 1));
     }
 
+    public Mach M_using_T0_by_T(double T0_by_T) {
+        return new Mach(sqrt(2.0 / (gamma - 1) * (T0_by_T - 1)));
+    }
+
+    public Mach M_using_p0_by_p(double p0_by_p) {
+        double T0_T = T2_by_T1(p0_by_p);
+        return M_using_T0_by_T(T0_T);
+    }
+
+    public Mach M_using_A_by_ACritical(double A_by_ACritical, MachRegime machRegime) {
+        double M_guess = switch (machRegime) {
+            case Subsonic -> 0.01;
+            case Supersonic -> 1.5;
+            case Sonic -> throw new RuntimeException("Mach regime cannot be Sonic.");
+        };
+        Function eqn = M -> A_by_ACritical(new Mach(M)) - A_by_ACritical;
+        double machNumber = solveNewtonRaphson(eqn, M_guess);
+        return new Mach(machNumber);
+    }
+
     public static void main(String[] args) {
         IsentropicFlow isentropic = new IsentropicFlow(new Air());
         System.out.println(isentropic.p2(new Pressure(101325, Pa), 1.2));
@@ -77,5 +103,15 @@ public class IsentropicFlow {
 
         System.out.println(isentropic.A_by_ACritical(machSubsonic));
         System.out.println(isentropic.A_by_ACritical(machSupersonic));
+
+        System.out.println(isentropic.M_using_T0_by_T(1.08712));
+        System.out.println(isentropic.M_using_T0_by_T(1.8));
+
+        System.out.println(isentropic.M_using_p0_by_p(1.33959));
+        System.out.println(isentropic.M_using_p0_by_p(7.82443));
+
+        System.out.println(isentropic.M_using_A_by_ACritical(2.96352, Subsonic));
+        System.out.println(isentropic.M_using_A_by_ACritical(2.40310, Supersonic));
+        // System.out.println(isentropic.M_using_A_by_ACritical(2.96352, Sonic)); // throws exception
     }
 }
