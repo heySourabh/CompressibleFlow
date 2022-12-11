@@ -14,18 +14,26 @@ public class Pressure {
         }
     }
 
-    private final double pressure_Pa;
+    private final double value;
+    private final Units units;
 
     public Pressure(double value, Units units) {
-        pressure_Pa = value * units.conversion;
+        this.value = value;
+        this.units = units;
     }
 
     public double in(Units units) {
+        double pressure_Pa = this.value * this.units.conversion;
         return pressure_Pa / units.conversion;
+    }
+
+    public Pressure to(Units units) {
+        return new Pressure(in(units), units);
     }
 
     @Override
     public String toString() {
+        double pressure_Pa = this.value * this.units.conversion;
         Units units;
         if (pressure_Pa > 1e6) {
             units = Units.MPa;
