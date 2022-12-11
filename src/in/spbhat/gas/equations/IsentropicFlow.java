@@ -35,6 +35,6 @@ public class IsentropicFlow {
     public static void main(String[] args) {
         IsentropicFlow isentropic = new IsentropicFlow(new Air());
         System.out.println(isentropic.p2(new Pressure(101325, Pa), 1.2));
-        System.out.println(isentropic.T2(new Temperature(10, C), 1.5).to(C));
+        System.out.println(isentropic.T2(new Temperature(10, C), 1.5));
     }
 }

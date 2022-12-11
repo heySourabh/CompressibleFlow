@@ -84,7 +84,7 @@ public class Temperature {
     }
 
     public Temperature times(double ratio) {
-        return new Temperature(in(Units.K) * ratio, Units.K);
+        return new Temperature(in(Units.K) * ratio, Units.K).to(this.units);
     }
 
     @Override
@@ -125,5 +125,6 @@ public class Temperature {
         System.out.println(anyTemperature.to(Units.F));
 
         System.out.println(anyTemperature.in(Units.F));
+        System.out.println(inletTemperature.times(5));
     }
 }
