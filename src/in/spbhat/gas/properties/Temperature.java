@@ -87,6 +87,10 @@ public class Temperature {
         return new Temperature(in(Units.K) * ratio, Units.K).to(this.units);
     }
 
+    public Temperature divide(double ratio) {
+        return new Temperature(in(Units.K) / ratio, Units.K).to(this.units);
+    }
+
     @Override
     public String toString() {
         String temperatureStr = Formatter.doubleToString(this.temperature);
@@ -126,5 +130,6 @@ public class Temperature {
 
         System.out.println(anyTemperature.in(Units.F));
         System.out.println(inletTemperature.times(5));
+        System.out.println(inletTemperature.divide(5));
     }
 }

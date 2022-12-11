@@ -39,6 +39,10 @@ public class Pressure {
         return new Pressure(value * ratio, units);
     }
 
+    public Pressure divide(double ratio) {
+        return new Pressure(value / ratio, units);
+    }
+
     @Override
     public String toString() {
         if (List.of(MPa, kPa, Pa).contains(this.units)) {
@@ -74,5 +78,6 @@ public class Pressure {
         System.out.println(lowPressure);
 
         System.out.println(lowPressure.times(2));
+        System.out.println(lowPressure.divide(2));
     }
 }
