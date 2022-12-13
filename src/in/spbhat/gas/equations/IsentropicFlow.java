@@ -7,13 +7,13 @@ import in.spbhat.gas.properties.Temperature;
 import in.spbhat.physics.Mach;
 import in.spbhat.physics.Mach.MachRegime;
 import in.spbhat.util.Numerical.Function;
+import in.spbhat.util.Numerical.Range;
 
 import static in.spbhat.gas.properties.Pressure.Units.Pa;
 import static in.spbhat.gas.properties.Pressure.Units.bar;
 import static in.spbhat.gas.properties.Temperature.Units.C;
-import static in.spbhat.physics.Mach.MachRegime.Subsonic;
-import static in.spbhat.physics.Mach.MachRegime.Supersonic;
-import static in.spbhat.util.Numerical.solveNewtonRaphson;
+import static in.spbhat.physics.Mach.MachRegime.*;
+import static in.spbhat.util.Numerical.solveBisection;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
@@ -76,13 +76,14 @@ public class IsentropicFlow {
     }
 
     public Mach M_using_A_by_ACritical(double A_by_ACritical, MachRegime machRegime) {
-        double M_guess = switch (machRegime) {
-            case Subsonic -> 0.01;
-            case Supersonic -> 1.5;
-            case Sonic -> throw new RuntimeException("Mach regime cannot be Sonic.");
+        if (A_by_ACritical == 1.0) return new Mach(1);
+        Range M_range = switch (machRegime) {
+            case Subsonic -> new Range(0, 1);
+            case Supersonic -> new Range(1, 150);
+            case Sonic -> throw new IllegalStateException("Flow cannot be Sonic for A/A* = " + A_by_ACritical);
         };
         Function eqn = M -> A_by_ACritical(new Mach(M)) - A_by_ACritical;
-        double machNumber = solveNewtonRaphson(eqn, M_guess);
+        double machNumber = solveBisection(eqn, M_range);
         return new Mach(machNumber);
     }
 
@@ -112,6 +113,7 @@ public class IsentropicFlow {
 
         System.out.println(isentropic.M_using_A_by_ACritical(2.96352, Subsonic));
         System.out.println(isentropic.M_using_A_by_ACritical(2.40310, Supersonic));
-        // System.out.println(isentropic.M_using_A_by_ACritical(2.96352, Sonic)); // throws exception
+        System.out.println(isentropic.M_using_A_by_ACritical(1.0, Sonic));
+        System.out.println(isentropic.M_using_A_by_ACritical(2.96352, Sonic)); // throws exception
     }
 }
