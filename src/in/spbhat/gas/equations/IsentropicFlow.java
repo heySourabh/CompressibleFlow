@@ -80,7 +80,7 @@ public class IsentropicFlow {
         Range M_range = switch (machRegime) {
             case Subsonic -> new Range(0, 1);
             case Supersonic -> new Range(1, 150);
-            case Sonic -> throw new IllegalStateException("Flow cannot be Sonic for A/A* = " + A_by_ACritical);
+            case Sonic -> throw new IllegalStateException("Flow cannot be 'sonic' for A/A* = " + A_by_ACritical);
         };
         Function eqn = M -> A_by_ACritical(new Mach(M)) - A_by_ACritical;
         double machNumber = solveBisection(eqn, M_range);
