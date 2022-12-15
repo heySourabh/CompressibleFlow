@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2022.
+ * author: Sourabh Bhat <heySourabh@gmail.com>
+ */
+
 package in.spbhat.gas.equations;
 
 import in.spbhat.gas.Air;
