@@ -52,10 +52,10 @@ public class NormalShock {
         double gp1 = gamma + 1;
         double gp1sqr = gp1 * gp1;
 
-        double numer = (2 * gamma * M1sqr - gm1) * (2 + gm1 * M1sqr);
-        double denom = gp1sqr * M1sqr;
+        double numerator = (2 * gamma * M1sqr - gm1) * (2 + gm1 * M1sqr);
+        double denominator = gp1sqr * M1sqr;
 
-        return numer / denom;
+        return numerator / denominator;
     }
 
     public Mach M2(Mach upstreamMach) {
