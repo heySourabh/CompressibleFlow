@@ -8,6 +8,12 @@ package in.spbhat.gas.equations;
 import in.spbhat.gas.Air;
 import in.spbhat.gas.Gas;
 import in.spbhat.physics.Mach;
+import in.spbhat.util.Formatter;
+import in.spbhat.util.Numerical;
+import in.spbhat.util.Numerical.Function;
+import in.spbhat.util.Numerical.Range;
+
+import static java.lang.Math.sqrt;
 
 public class NormalShock {
     private final Gas gas;
@@ -27,7 +33,7 @@ public class NormalShock {
     public double p2_by_p1(Mach upstreamMach) {
         validateSupersonic(upstreamMach);
         double M1 = upstreamMach.machNumber();
-        return (2.0 * gamma * M1 * M1 - (gamma - 1)) / (gamma + 1);
+        return (2 * gamma * M1 * M1 - (gamma - 1)) / (gamma + 1);
     }
 
     public double rho2_by_rho1(Mach upstreamMach) {
@@ -58,7 +64,7 @@ public class NormalShock {
         double M1sqr = M1 * M1;
         double M2sqr = ((gamma - 1) * M1sqr + 2) / (2 * gamma * M1sqr - (gamma - 1));
 
-        return new Mach(Math.sqrt(M2sqr));
+        return new Mach(sqrt(M2sqr));
     }
 
     public double p02_by_p01(Mach upstreamMach) {
@@ -82,6 +88,25 @@ public class NormalShock {
         return p02_p2 * p2_p1;
     }
 
+    public Mach M1_using_p2_by_p1(double p2_by_p1) {
+        if (p2_by_p1 < 1) {
+            throw new IllegalArgumentException("Normal shock: p2/p1 must be greater than or equal to 1.");
+        }
+        double M1sqr = ((gamma + 1) * p2_by_p1 + (gamma - 1)) / (2 * gamma);
+        return new Mach(sqrt(M1sqr));
+    }
+
+    public Mach M1_using_p02_by_p1(double p02_by_p1) {
+        double p02_p1_sonic = p02_by_p1(new Mach(1));
+        if (p02_by_p1 < p02_p1_sonic) {
+            throw new IllegalArgumentException("Normal shock: p02/p1 must be greater than or equal to " +
+                                               Formatter.doubleToString(p02_p1_sonic));
+        }
+        Function eqn = M1 -> p02_by_p1(new Mach(M1)) - p02_by_p1;
+        double M1 = Numerical.solveBisection(eqn, new Range(1, 150));
+        return new Mach(M1);
+    }
+
     public static void main(String[] args) {
         NormalShock ns = new NormalShock(new Air());
         System.out.println(ns.p2_by_p1(new Mach(2.5)));
@@ -91,11 +116,16 @@ public class NormalShock {
         System.out.println(ns.p02_by_p01(new Mach(2.7)));
         System.out.println(ns.p02_by_p1(new Mach(3.2)));
 
+        System.out.println(ns.M1_using_p2_by_p1(10.33332));
+        System.out.println(ns.M1_using_p02_by_p1(18.09504));
+
         // System.out.println(ns.p2_by_p1(new Mach(0.5))); // throws exception
         // System.out.println(ns.rho2_by_rho1(new Mach(0.999))); // throws exception
         // System.out.println(ns.T2_by_T1(new Mach(0.75))); // throws exception
         // System.out.println(ns.M2(new Mach(0.1))); // throws exception
         // System.out.println(ns.p02_by_p01(new Mach(0.7))); // throws exception
-        // System.out.println(ns.p02_by_p1(new Mach(0.2)));
+        // System.out.println(ns.p02_by_p1(new Mach(0.2)));  // throws exception
+        // System.out.println(ns.M1_using_p2_by_p1(0.999999));  // throws exception
+        // System.out.println(ns.M1_using_p02_by_p1(1.89292));  // throws exception for air
     }
 }
