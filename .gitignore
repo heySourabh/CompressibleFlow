@@ -1,8 +1,11 @@
 # Settings
-.idea/
+/.idea/
 
 # Compiled class file
 *.class
 
 # Compiled output folder
-out/
+/out/
+
+# library jars
+/lib/
