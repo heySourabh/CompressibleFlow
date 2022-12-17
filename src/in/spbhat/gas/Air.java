@@ -7,9 +7,9 @@ package in.spbhat.gas;
 
 import in.spbhat.gas.constants.MolarMass;
 import in.spbhat.gas.constants.R;
-import in.spbhat.gas.constants.SpecificHeat;
 
 import static in.spbhat.gas.constants.MolarMass.Units.moles_gram;
+import static in.spbhat.gas.constants.SpecificHeat.Units.J_kgK;
 
 public class Air implements Gas {
     @Override
@@ -19,7 +19,7 @@ public class Air implements Gas {
 
     @Override
     public R R() {
-        return new R(287.0, SpecificHeat.Units.J_kgK);
+        return new R(287.0, J_kgK);
     }
 
     @Override
