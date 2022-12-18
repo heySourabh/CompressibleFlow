@@ -64,21 +64,4 @@ public class Angle {
         else
             return Formatter.doubleToString(this.value) + this.units.unitStr;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new Angle(90, degrees).to(radians));
-        System.out.println(new Angle(Math.PI, radians).to(degrees));
-        System.out.println(new Angle(60, degrees).to(radians));
-        System.out.println(new Angle(Math.PI / 3.0, radians).to(degrees));
-
-        System.out.println(new Angle(60, degrees).in(radians));
-        System.out.println(new Angle(Math.PI / 3.0, radians).in(degrees));
-
-        System.out.println(sin(new Angle(30, degrees)));
-        System.out.println(cos(new Angle(60, degrees)));
-        System.out.println(cos(new Angle(Math.PI / 3, radians)));
-
-        System.out.println(asin(0.5));
-        System.out.println(acos(0.5));
-    }
 }
