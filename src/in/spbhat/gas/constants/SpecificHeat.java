@@ -7,9 +7,6 @@ package in.spbhat.gas.constants;
 
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.gas.constants.SpecificHeat.Units.J_kgK;
-import static in.spbhat.gas.constants.SpecificHeat.Units.btu_lbmR;
-
 public abstract class SpecificHeat {
     public enum Units {
         J_kgK(1.0, "J/kg-K"),
@@ -45,14 +42,5 @@ public abstract class SpecificHeat {
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;
-    }
-
-    public static void main(String[] args) {
-        var specificHeat_SI = new SpecificHeat(1, J_kgK){};
-        var specificHeat_nonStandard = new SpecificHeat(1, btu_lbmR){};
-        System.out.println(specificHeat_SI);
-        System.out.println(specificHeat_nonStandard);
-        System.out.println(specificHeat_SI.in(btu_lbmR) + " " + btu_lbmR);
-        System.out.println(specificHeat_nonStandard.in(J_kgK) + " " + J_kgK);
     }
 }
