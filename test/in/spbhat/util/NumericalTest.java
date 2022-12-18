@@ -51,7 +51,7 @@ class NumericalTest {
     }
 
     @Test
-    void solveBisection_invalid_bracket_exception() {
+    void solveBisectionTest_invalid_bracket_exception() {
         assertThrows(RuntimeException.class,
                 () -> solveBisection(x -> x * x - 2, new Range(2, 3)));
     }
