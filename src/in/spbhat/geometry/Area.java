@@ -7,8 +7,6 @@ package in.spbhat.geometry;
 
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.geometry.Area.Units.*;
-
 public class Area {
 
     public enum Units {
@@ -51,18 +49,6 @@ public class Area {
 
     @Override
     public String toString() {
-        return Formatter.doubleToString(this.value) + " " + this.units.unitStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Area(123, sq_m).to(sq_cm));
-        System.out.println(new Area(123, sq_cm).to(sq_m));
-        System.out.println(new Area(0.67, sq_m).to(sq_mm));
-        System.out.println(new Area(452, sq_mm).to(sq_m));
-        System.out.println(new Area(23, sq_inch).to(sq_m));
-        System.out.println(new Area(23, sq_m).to(sq_inch));
-        System.out.println(new Area(2.35, sq_ft).to(sq_inch));
-        System.out.println(new Area(2.35, sq_ft).to(sq_m));
-        System.out.println(new Area(2.35, sq_m).to(sq_ft));
+        return Formatter.doubleToString(this.value) + " " + this.units;
     }
 }
