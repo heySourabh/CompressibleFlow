@@ -5,6 +5,9 @@
 
 package in.spbhat.util;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 public class Numerical {
     @FunctionalInterface
     public interface Function {
@@ -20,13 +23,17 @@ public class Numerical {
     }
 
     private static double tolerance = 1e-8;
+    private static int maxIterations = 500;
 
     public static void setTolerance(double tolerance) {
         Numerical.tolerance = tolerance;
     }
 
+    public static void setMaxIterations(int maxIterations) {
+        Numerical.maxIterations = maxIterations;
+    }
+
     public static double solveNewtonRaphson(Function f, double x0) {
-        int maxIterations = 500;
         double x = x0;
         for (int i = 0; i < maxIterations; i++) {
             double fx = f.eval(x);
@@ -44,14 +51,8 @@ public class Numerical {
     }
 
     public static double solveBisection(Function f, Range bracket) {
-        int maxIterations = 500;
-
-        double a = bracket.low;
-        double b = bracket.high;
-
-        if (a >= b) {
-            throw new RuntimeException("Bisection method: invalid bracket %s.".formatted(bracket));
-        }
+        double a = min(bracket.low, bracket.high);
+        double b = max(bracket.low, bracket.high);
 
         double fa = f.eval(a);
         double fb = f.eval(b);
