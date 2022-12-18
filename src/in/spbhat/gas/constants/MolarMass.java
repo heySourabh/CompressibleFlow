@@ -32,20 +32,12 @@ public class MolarMass {
     }
 
     public double in(Units units) {
-        if (units != Units.moles_gram) {
-            throw new IllegalArgumentException("Not implemented yet!");
-        }
+        // Only moles/gram is available, hence no need of conversion.
         return this.value;
     }
 
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;
-    }
-
-    public static void main(String[] args) {
-        MolarMass molarMass = new MolarMass(28.9, Units.moles_gram);
-        System.out.println(molarMass);
-        System.out.println(molarMass.in(Units.moles_gram));
     }
 }
