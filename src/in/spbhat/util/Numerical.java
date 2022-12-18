@@ -76,16 +76,4 @@ public class Numerical {
 
         throw new RuntimeException("Bisection method: did not converge.");
     }
-
-    public static void main(String[] args) {
-        Function f = x -> x + 1;
-        Numerical.setTolerance(1e-12);
-        System.out.println(Numerical.solveNewtonRaphson(f, 0));
-        System.out.println(Numerical.solveNewtonRaphson(x -> x * x - 2, -5));
-        System.out.println(Numerical.solveNewtonRaphson(x -> x * x - 2, 1));
-
-        Numerical.setTolerance(1e-8);
-        System.out.println(Numerical.solveBisection(x -> x * x - 2, new Range(-2, 0)));
-        System.out.println(Numerical.solveBisection(x -> x * x - 2, new Range(-1, 2)));
-    }
 }
