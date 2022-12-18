@@ -25,13 +25,13 @@ class FormatterTest {
         assertEquals("12345", Formatter.doubleToString(12345, 6));
         assertEquals("12300", Formatter.doubleToString(12300.0, 7));
         assertEquals("45", Formatter.doubleToString(45.00002, 6));
-        assertEquals("4e+06", Formatter.doubleToString(4000000.2, 6));
         assertEquals("4000000", Formatter.doubleToString(4000000.2, 7));
 
     }
 
     @Test
     void doubleToString_exponents() {
+        assertEquals("4e+06", Formatter.doubleToString(4000000.2, 6));
         assertEquals("1.2e+06", Formatter.doubleToString(1200001));
         assertEquals("-1.2e+06", Formatter.doubleToString(-1200001));
         assertEquals("1.2e-06", Formatter.doubleToString(0.000001200001, 6));

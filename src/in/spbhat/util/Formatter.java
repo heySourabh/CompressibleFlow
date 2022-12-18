@@ -30,12 +30,4 @@ public class Formatter {
             return doubleValueStr;
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(doubleToString(4545.3545));
-        System.out.println(doubleToString(1.25245345e10));
-        System.out.println(doubleToString(0.00000000457));
-        System.out.println(doubleToString(123.567));
-        System.out.println(doubleToString(1235000.34));
-    }
 }
