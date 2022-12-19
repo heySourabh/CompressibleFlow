@@ -7,8 +7,6 @@ package in.spbhat.geometry;
 
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.geometry.Length.Units.*;
-
 public class Length {
     public enum Units {
         m(1.0), km(1e3), cm(1e-2), ft(0.3048), inches(0.0254);
@@ -40,18 +38,5 @@ public class Length {
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Length(5, m));
-        System.out.println(new Length(5, m).to(inches));
-        System.out.println(new Length(5, m).to(ft));
-        System.out.println(new Length(5, ft).to(m));
-        System.out.println(new Length(5, ft).to(cm));
-        System.out.println(new Length(5, cm).to(m));
-        System.out.println(new Length(1.23, km).to(m));
-        System.out.println(new Length(10.23, km).to(cm));
-        System.out.println(new Length(10.23, ft).to(km));
-        System.out.println(new Length(1.23, km).to(ft));
     }
 }
