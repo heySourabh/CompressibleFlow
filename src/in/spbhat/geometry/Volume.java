@@ -7,7 +7,6 @@ package in.spbhat.geometry;
 
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.geometry.Volume.Units.*;
 import static java.lang.Math.pow;
 
 public class Volume {
@@ -51,18 +50,6 @@ public class Volume {
 
     @Override
     public String toString() {
-        return Formatter.doubleToString(this.value) + " " + this.units.unitStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Volume(123, cubic_m).to(cubic_cm));
-        System.out.println(new Volume(123, cubic_cm).to(cubic_m));
-        System.out.println(new Volume(0.67, cubic_m).to(cubic_mm));
-        System.out.println(new Volume(452, cubic_mm).to(cubic_m));
-        System.out.println(new Volume(23, cubic_inch).to(cubic_m));
-        System.out.println(new Volume(23, cubic_m).to(cubic_inch));
-        System.out.println(new Volume(2.35, cubic_ft).to(cubic_inch));
-        System.out.println(new Volume(2.35, cubic_ft).to(cubic_m));
-        System.out.println(new Volume(2.35, cubic_m).to(cubic_ft));
+        return Formatter.doubleToString(this.value) + " " + this.units;
     }
 }
