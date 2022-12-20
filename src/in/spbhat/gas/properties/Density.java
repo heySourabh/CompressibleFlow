@@ -9,8 +9,6 @@ import in.spbhat.geometry.Volume;
 import in.spbhat.physics.Mass;
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.gas.properties.Density.Units.kg_m3;
-import static in.spbhat.gas.properties.Density.Units.pound_ft3;
 import static in.spbhat.geometry.Volume.Units.cubic_m;
 import static in.spbhat.physics.Mass.Units.kg;
 
@@ -41,6 +39,10 @@ public class Density {
         this.units = units;
     }
 
+    public Density(Mass mass, Volume volume) {
+        this(mass.in(kg) / volume.in(cubic_m), Units.kg_m3);
+    }
+
     public double in(Units units) {
         double density_kg_m3 = this.value * this.units.conversion;
         return density_kg_m3 / units.conversion;
@@ -50,22 +52,8 @@ public class Density {
         return new Density(in(units), units);
     }
 
-    public static Density calculateDensity(Mass mass, Volume volume) {
-        return new Density(mass.in(kg) / volume.in(cubic_m), kg_m3);
-    }
-
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;
-    }
-
-    public static void main(String[] args) {
-        Density density = new Density(10.5798789, kg_m3);
-        System.out.println(density);
-        System.out.println(density.in(kg_m3));
-        System.out.println(new Density(541.45, pound_ft3).to(kg_m3));
-        System.out.println(new Density(45.7, kg_m3).to(pound_ft3));
-
-        System.out.println(Density.calculateDensity(new Mass(1.5, kg), new Volume(0.5, cubic_m)));
     }
 }
