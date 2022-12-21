@@ -101,40 +101,4 @@ public class Temperature {
         String temperatureStr = Formatter.doubleToString(this.temperature);
         return temperatureStr + "" + this.units;
     }
-
-    public static void main(String[] args) {
-        Temperature inletTemperature = new Temperature(35, Units.C);
-        System.out.println(inletTemperature);
-        System.out.println(inletTemperature.to(Units.K));
-        System.out.println(inletTemperature.to(Units.F));
-        System.out.println(inletTemperature.to(Units.R));
-
-        System.out.println("-----");
-
-        Temperature outletTemperature = new Temperature(300, Units.K);
-        System.out.println(outletTemperature);
-        System.out.println(outletTemperature.to(Units.C));
-        System.out.println(outletTemperature.to(Units.F));
-        System.out.println(outletTemperature.to(Units.R));
-
-        System.out.println("-----");
-
-        Temperature someTemperature = new Temperature(245, Units.F);
-        System.out.println(someTemperature);
-        System.out.println(someTemperature.to(Units.K));
-        System.out.println(someTemperature.to(Units.C));
-        System.out.println(someTemperature.to(Units.R));
-
-        System.out.println("-----");
-
-        Temperature anyTemperature = new Temperature(123, Units.R);
-        System.out.println(anyTemperature);
-        System.out.println(anyTemperature.to(Units.K));
-        System.out.println(anyTemperature.to(Units.C));
-        System.out.println(anyTemperature.to(Units.F));
-
-        System.out.println(anyTemperature.in(Units.F));
-        System.out.println(inletTemperature.times(5));
-        System.out.println(inletTemperature.divide(5));
-    }
 }
