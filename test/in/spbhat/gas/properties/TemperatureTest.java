@@ -66,6 +66,11 @@ class TemperatureTest {
         assertEquals("434.781°R", new Temperature(-24.889, F).to(R).toString());
         // R -> F
         assertEquals("-87.278°F", new Temperature(372.392, R).to(F).toString());
+        // K, C, F, R: Identity tests
+        assertEquals("269.579K", new Temperature(269.579, K).to(K).toString());
+        assertEquals("-93.257°C", new Temperature(-93.2570, C).to(C).toString());
+        assertEquals("-191.171°F", new Temperature(-191.171, F).to(F).toString());
+        assertEquals("231.258°R", new Temperature(231.258, R).to(R).toString());
     }
 
     @Test
