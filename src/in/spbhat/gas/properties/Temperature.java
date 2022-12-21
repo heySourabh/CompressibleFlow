@@ -54,10 +54,10 @@ public class Temperature {
             }
         };
 
-        final String unitString;
+        private final String unitStr;
 
-        Units(String unitString) {
-            this.unitString = unitString;
+        Units(String unitStr) {
+            this.unitStr = unitStr;
         }
 
         abstract double toKelvin(double value);
@@ -66,7 +66,7 @@ public class Temperature {
 
         @Override
         public String toString() {
-            return unitString;
+            return unitStr;
         }
     }
 
@@ -84,8 +84,7 @@ public class Temperature {
     }
 
     public Temperature to(Units units) {
-        double temperature_K = this.units.toKelvin(temperature);
-        return new Temperature(units.fromKelvin(temperature_K), units);
+        return new Temperature(in(units), units);
     }
 
     public Temperature times(double ratio) {
