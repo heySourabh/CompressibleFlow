@@ -7,9 +7,6 @@ package in.spbhat.physics;
 
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.physics.Force.Units.N;
-import static in.spbhat.physics.Force.Units.pound_force;
-
 public class Force {
     public enum Units {
         N(1.0, "N"),
@@ -48,13 +45,6 @@ public class Force {
 
     @Override
     public String toString() {
-        return Formatter.doubleToString(this.value) + " " + this.units.unitStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Force(123, N));
-        System.out.println(new Force(1.4, pound_force));
-        System.out.println(new Force(5.5, N).to(pound_force));
-        System.out.println(new Force(82.5, pound_force).to(N));
+        return Formatter.doubleToString(this.value) + " " + this.units;
     }
 }
