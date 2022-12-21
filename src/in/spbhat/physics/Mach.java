@@ -13,9 +13,15 @@ import static in.spbhat.geometry.Angle.asin;
 import static in.spbhat.geometry.Angle.sin;
 import static java.lang.Math.abs;
 
-public record Mach(double machNumber) {
+public class Mach {
+    public final double machNumber;
+
     public Mach(double machNumber) {
         this.machNumber = abs(machNumber);
+    }
+
+    public Mach(Angle machAngle) {
+        this(1.0 / sin(machAngle));
     }
 
     public enum MachRegime {
@@ -27,10 +33,6 @@ public record Mach(double machNumber) {
             throw new IllegalStateException("Cannot compute Mach angle for 'subsonic' flow: " + this);
         }
         return asin(1.0 / machNumber);
-    }
-
-    public static Mach calculateMach(Angle machAngle) {
-        return new Mach(1.0 / sin(machAngle));
     }
 
     public MachRegime machRegime() {
@@ -48,7 +50,7 @@ public record Mach(double machNumber) {
         System.out.println(new Mach(5));
         System.out.println(new Mach(-5));
         System.out.println(new Mach(2).machAngle());
-        System.out.println(Mach.calculateMach(new Angle(30, degrees)));
+        System.out.println(new Mach(new Angle(30, degrees)));
 
         System.out.println(new Mach(5).machRegime());
         System.out.println(new Mach(1.00001).machRegime());

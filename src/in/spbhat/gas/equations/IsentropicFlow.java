@@ -46,7 +46,7 @@ public class IsentropicFlow {
     }
 
     public double T0_by_T(Mach mach) {
-        double M = mach.machNumber();
+        double M = mach.machNumber;
         return 1.0 + (gamma - 1) / 2.0 * M * M;
     }
 
@@ -67,7 +67,7 @@ public class IsentropicFlow {
 
     public double A_by_ACritical(Mach mach) {
         double T0_T = T0_by_T(mach);
-        double M = mach.machNumber();
+        double M = mach.machNumber;
         return 1.0 / M * pow(2.0 / (gamma + 1) * T0_T, (gamma + 1) / 2.0 / (gamma - 1));
     }
 

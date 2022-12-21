@@ -32,20 +32,20 @@ public class NormalShock {
 
     public double p2_by_p1(Mach upstreamMach) {
         validateSupersonic(upstreamMach);
-        double M1 = upstreamMach.machNumber();
+        double M1 = upstreamMach.machNumber;
         return (2 * gamma * M1 * M1 - (gamma - 1)) / (gamma + 1);
     }
 
     public double rho2_by_rho1(Mach upstreamMach) {
         validateSupersonic(upstreamMach);
-        double M1 = upstreamMach.machNumber();
+        double M1 = upstreamMach.machNumber;
         double M1sqr = M1 * M1;
         return (gamma + 1) * M1sqr / (2 + (gamma - 1) * M1sqr);
     }
 
     public double T2_by_T1(Mach upstreamMach) {
         validateSupersonic(upstreamMach);
-        double M1 = upstreamMach.machNumber();
+        double M1 = upstreamMach.machNumber;
 
         double M1sqr = M1 * M1;
         double gm1 = gamma - 1;
@@ -60,7 +60,7 @@ public class NormalShock {
 
     public Mach M2(Mach upstreamMach) {
         validateSupersonic(upstreamMach);
-        double M1 = upstreamMach.machNumber();
+        double M1 = upstreamMach.machNumber;
         double M1sqr = M1 * M1;
         double M2sqr = ((gamma - 1) * M1sqr + 2) / (2 * gamma * M1sqr - (gamma - 1));
 
