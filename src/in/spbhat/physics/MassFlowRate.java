@@ -12,7 +12,6 @@ import in.spbhat.util.Formatter;
 import static in.spbhat.gas.properties.Density.Units.kg_m3;
 import static in.spbhat.geometry.Area.Units.sq_m;
 import static in.spbhat.physics.MassFlowRate.Units.kg_s;
-import static in.spbhat.physics.MassFlowRate.Units.pound_s;
 import static in.spbhat.physics.Speed.Units.m_s;
 
 public class MassFlowRate {
@@ -42,6 +41,10 @@ public class MassFlowRate {
         this.units = units;
     }
 
+    public MassFlowRate(Density density, Area area, Speed velocity) {
+        this(density.in(kg_m3) * area.in(sq_m) * velocity.in(m_s), kg_s);
+    }
+
     public double in(Units units) {
         double massFlowRate_kg_s = this.value * this.units.conversion;
         return massFlowRate_kg_s / units.conversion;
@@ -51,24 +54,8 @@ public class MassFlowRate {
         return new MassFlowRate(in(units), units);
     }
 
-    public static MassFlowRate calculateMassFlowRate(Density density, Area area, Speed velocity) {
-        return new MassFlowRate(density.in(kg_m3) * area.in(sq_m) * velocity.in(m_s), kg_s);
-    }
-
     @Override
     public String toString() {
-        return Formatter.doubleToString(this.value) + " " + this.units.unitStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new MassFlowRate(123, kg_s));
-        System.out.println(new MassFlowRate(1.4, pound_s));
-        System.out.println(new MassFlowRate(5.5, kg_s).to(pound_s));
-        System.out.println(new MassFlowRate(82.5, pound_s).to(kg_s));
-
-        System.out.println(MassFlowRate.calculateMassFlowRate(
-                new Density(1.2, kg_m3),
-                new Area(2, sq_m),
-                new Speed(5, m_s)));
+        return Formatter.doubleToString(this.value) + " " + this.units;
     }
 }
