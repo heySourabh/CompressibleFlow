@@ -9,3 +9,6 @@
 
 # library jars
 /lib/
+
+# Other ignored files
+/TODOs.txt
