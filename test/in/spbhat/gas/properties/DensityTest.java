@@ -15,6 +15,7 @@ import static in.spbhat.geometry.Volume.Units.cubic_ft;
 import static in.spbhat.geometry.Volume.Units.cubic_m;
 import static in.spbhat.physics.Mass.Units.kg;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DensityTest {
     @Test
@@ -26,6 +27,12 @@ class DensityTest {
     @Test
     void toStringTest() {
         assertEquals("10.5799 kg/m^3", new Density(10.5798789, kg_m3).toString());
+    }
+
+    @Test
+    void non_positive_density_throws_exception() {
+        var error = assertThrows(IllegalArgumentException.class, () -> new Density(-1.22, kg_m3));
+        assertEquals("Density must be positive.", error.getMessage());
     }
 
     @Test

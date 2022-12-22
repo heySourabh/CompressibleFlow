@@ -35,6 +35,9 @@ public class Density {
     }
 
     public Density(double value, Units units) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("Density must be positive.");
+        }
         this.value = value;
         this.units = units;
     }
