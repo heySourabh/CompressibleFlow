@@ -5,7 +5,6 @@
 
 package in.spbhat.gas.equations;
 
-import in.spbhat.gas.Air;
 import in.spbhat.gas.Gas;
 import in.spbhat.physics.Mach;
 import in.spbhat.util.Formatter;
@@ -26,7 +25,7 @@ public class NormalShock {
 
     private static void validateSupersonic(Mach mach) {
         if (mach.machRegime() == Mach.MachRegime.Subsonic) {
-            throw new IllegalArgumentException("Normal shock: Upstream Mach number is subsonic!");
+            throw new IllegalArgumentException("Normal shock: Upstream Mach number is subsonic (" + mach + ").");
         }
     }
 
@@ -105,27 +104,5 @@ public class NormalShock {
         Function eqn = M1 -> p02_by_p1(new Mach(M1)) - p02_by_p1;
         double M1 = Numerical.solveBisection(eqn, new Range(1, 150));
         return new Mach(M1);
-    }
-
-    public static void main(String[] args) {
-        NormalShock ns = new NormalShock(new Air());
-        System.out.println(ns.p2_by_p1(new Mach(2.5)));
-        System.out.println(ns.rho2_by_rho1(new Mach(2)));
-        System.out.println(ns.T2_by_T1(new Mach(1.5)));
-        System.out.println(ns.M2(new Mach(4.1)));
-        System.out.println(ns.p02_by_p01(new Mach(2.7)));
-        System.out.println(ns.p02_by_p1(new Mach(3.2)));
-
-        System.out.println(ns.M1_using_p2_by_p1(10.33332));
-        System.out.println(ns.M1_using_p02_by_p1(18.09504));
-
-        // System.out.println(ns.p2_by_p1(new Mach(0.5))); // throws exception
-        // System.out.println(ns.rho2_by_rho1(new Mach(0.999))); // throws exception
-        // System.out.println(ns.T2_by_T1(new Mach(0.75))); // throws exception
-        // System.out.println(ns.M2(new Mach(0.1))); // throws exception
-        // System.out.println(ns.p02_by_p01(new Mach(0.7))); // throws exception
-        // System.out.println(ns.p02_by_p1(new Mach(0.2)));  // throws exception
-        // System.out.println(ns.M1_using_p2_by_p1(0.999999));  // throws exception
-        // System.out.println(ns.M1_using_p02_by_p1(1.89292));  // throws exception for air
     }
 }
