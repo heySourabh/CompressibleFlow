@@ -102,7 +102,8 @@ public class NormalShock {
                                                Formatter.doubleToString(p02_p1_sonic));
         }
         Function eqn = M1 -> p02_by_p1(new Mach(M1)) - p02_by_p1;
-        double M1 = Numerical.solveBisection(eqn, new Range(1, 150));
+        Numerical numerical = new Numerical();
+        double M1 = numerical.solveBisection(eqn, new Range(1, 150));
         return new Mach(M1);
     }
 }

@@ -10,10 +10,10 @@ import in.spbhat.gas.properties.Pressure;
 import in.spbhat.gas.properties.Temperature;
 import in.spbhat.physics.Mach;
 import in.spbhat.physics.Mach.MachRegime;
+import in.spbhat.util.Numerical;
 import in.spbhat.util.Numerical.Function;
 import in.spbhat.util.Numerical.Range;
 
-import static in.spbhat.util.Numerical.solveBisection;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
@@ -86,7 +86,8 @@ public class IsentropicFlow {
             case Sonic -> throw new IllegalStateException("Flow cannot be 'sonic' for A/A* = " + A_by_ACritical);
         };
         Function eqn = M -> A_by_ACritical(new Mach(M)) - A_by_ACritical;
-        double machNumber = solveBisection(eqn, M_range);
+        Numerical numerical = new Numerical();
+        double machNumber = numerical.solveBisection(eqn, M_range);
         return new Mach(machNumber);
     }
 }

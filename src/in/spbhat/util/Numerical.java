@@ -14,26 +14,33 @@ public class Numerical {
         double eval(double x);
     }
 
+    private double tolerance;
+    private int maxIterations;
+
+    public Numerical() {
+        this.tolerance = 1e-8;
+        this.maxIterations = 500;
+    }
+
+    public Numerical withTolerance(double tolerance) {
+        this.tolerance = tolerance;
+        return this;
+    }
+
+    public Numerical withMaxIterations(int maxIterations) {
+        this.maxIterations = maxIterations;
+        return this;
+    }
+
     public record Range(double low, double high) {
     }
 
-    public static double diff(Function f, double x) {
+    private double diff(Function f, double x) {
         double h = 1e-3;
         return (f.eval(x + h) - f.eval(x - h)) / (2.0 * h);
     }
 
-    private static double tolerance = 1e-8;
-    private static int maxIterations = 500;
-
-    public static void setTolerance(double tolerance) {
-        Numerical.tolerance = tolerance;
-    }
-
-    public static void setMaxIterations(int maxIterations) {
-        Numerical.maxIterations = maxIterations;
-    }
-
-    public static double solveNewtonRaphson(Function f, double x0) {
+    public double solveNewtonRaphson(Function f, double x0) {
         double x = x0;
         for (int i = 0; i < maxIterations; i++) {
             double fx = f.eval(x);
@@ -50,7 +57,7 @@ public class Numerical {
         return x;
     }
 
-    public static double solveBisection(Function f, Range bracket) {
+    public double solveBisection(Function f, Range bracket) {
         double a = min(bracket.low, bracket.high);
         double b = max(bracket.low, bracket.high);
 
