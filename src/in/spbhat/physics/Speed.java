@@ -7,7 +7,7 @@ package in.spbhat.physics;
 
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.physics.Speed.Units.*;
+import static java.lang.Math.abs;
 
 public class Speed {
     public enum Units {
@@ -33,7 +33,7 @@ public class Speed {
     private final Units units;
 
     public Speed(double value, Units units) {
-        this.value = value;
+        this.value = abs(value);
         this.units = units;
     }
 
@@ -48,15 +48,6 @@ public class Speed {
 
     @Override
     public String toString() {
-        return Formatter.doubleToString(this.value) + " " + this.units.unitStr;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Speed(123, m_s));
-        System.out.println(new Speed(123, m_s).to(ft_s));
-        System.out.println(new Speed(4.5, ft_s).to(m_s));
-        System.out.println(new Speed(234, km_h).to(m_s));
-        System.out.println(new Speed(65.47, m_s).to(km_h));
-        System.out.println(new Speed(862.6, km_h).to(ft_s));
+        return Formatter.doubleToString(this.value) + " " + this.units;
     }
 }
