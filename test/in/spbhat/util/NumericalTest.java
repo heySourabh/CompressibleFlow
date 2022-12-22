@@ -25,6 +25,7 @@ class NumericalTest {
         assertEquals(-sqrt(2), solveNewtonRaphson(x -> x * x - 2, -5), 1e-12);
         assertEquals(sqrt(2), solveNewtonRaphson(x -> x * x - 2, 1), 1e-12);
         assertEquals(PI / 6, solveNewtonRaphson(x -> sin(x) - 0.5, 0.0), 1e-12);
+        Numerical.setTolerance(1e-8);
     }
 
     @Test
@@ -50,6 +51,8 @@ class NumericalTest {
         RuntimeException error = assertThrows(RuntimeException.class,
                 () -> solveBisection(x -> x * x - 2, new Range(0, 2)));
         assertEquals("Bisection method: did not converge.", error.getMessage());
+        Numerical.setTolerance(1e-8);
+        Numerical.setMaxIterations(500);
     }
 
     @Test
