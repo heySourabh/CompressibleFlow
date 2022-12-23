@@ -22,6 +22,9 @@ public class Length {
     private final Units units;
 
     public Length(double value, Units units) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Length cannot be negative.");
+        }
         this.value = value;
         this.units = units;
     }

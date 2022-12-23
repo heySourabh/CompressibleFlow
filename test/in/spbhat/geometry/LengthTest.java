@@ -9,8 +9,16 @@ import org.junit.jupiter.api.Test;
 
 import static in.spbhat.geometry.Length.Units.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LengthTest {
+    @Test
+    void throw_exception_if_length_is_negative() {
+        var error = assertThrows(IllegalArgumentException.class, () -> new Length(-1, m));
+        assertEquals("Length cannot be negative.", error.getMessage());
+        assertEquals("0 m", new Length(0, m).toString());
+    }
+
     @Test
     void convertToTest() {
         assertEquals("196.85 inches", new Length(5, m).to(inches).toString());
