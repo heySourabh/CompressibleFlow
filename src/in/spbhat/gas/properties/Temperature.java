@@ -74,6 +74,9 @@ public class Temperature {
     private final Units units;
 
     public Temperature(double value, Units units) {
+        if (units.toKelvin(value) <= 0) {
+            throw new IllegalArgumentException("Absolute temperature must be positive.");
+        }
         this.temperature = value;
         this.units = units;
     }

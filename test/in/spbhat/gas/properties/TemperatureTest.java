@@ -9,8 +9,24 @@ import org.junit.jupiter.api.Test;
 
 import static in.spbhat.gas.properties.Temperature.Units.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TemperatureTest {
+
+    @Test
+    void throw_exception_if_absolute_temperature_is_non_positive() {
+        var error = assertThrows(IllegalArgumentException.class, () -> new Temperature(-12, K));
+        assertEquals("Absolute temperature must be positive.", error.getMessage());
+        error = assertThrows(IllegalArgumentException.class, () -> new Temperature(0, K));
+        assertEquals("Absolute temperature must be positive.", error.getMessage());
+        error = assertThrows(IllegalArgumentException.class, () -> new Temperature(-273.5, C));
+        assertEquals("Absolute temperature must be positive.", error.getMessage());
+        error = assertThrows(IllegalArgumentException.class, () -> new Temperature(0, R));
+        assertEquals("Absolute temperature must be positive.", error.getMessage());
+        error = assertThrows(IllegalArgumentException.class, () -> new Temperature(-5, R));
+        assertEquals("Absolute temperature must be positive.", error.getMessage());
+        assertEquals("-10°C", new Temperature(-10, C).toString());
+    }
 
     @Test
     void in() {
