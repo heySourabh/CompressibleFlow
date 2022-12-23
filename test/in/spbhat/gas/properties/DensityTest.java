@@ -33,6 +33,8 @@ class DensityTest {
     void non_positive_density_throws_exception() {
         var error = assertThrows(IllegalArgumentException.class, () -> new Density(-1.22, kg_m3));
         assertEquals("Density must be positive.", error.getMessage());
+        error = assertThrows(IllegalArgumentException.class, () -> new Density(0, kg_m3));
+        assertEquals("Density must be positive.", error.getMessage());
     }
 
     @Test
