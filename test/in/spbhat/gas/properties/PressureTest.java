@@ -10,8 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import static in.spbhat.gas.properties.Pressure.Units.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PressureTest {
+
+    @Test
+    void throw_exception_if_pressure_is_negative() {
+        assertEquals("0 Pa", new Pressure(0, kPa).toString());
+        var error = assertThrows(IllegalArgumentException.class, () -> new Pressure(-2, Pa));
+        assertEquals("Absolute pressure cannot be negative.", error.getMessage());
+    }
 
     @Test
     void in() {

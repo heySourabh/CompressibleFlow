@@ -27,6 +27,9 @@ public class Pressure {
     private final Units units;
 
     public Pressure(double value, Units units) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Absolute pressure cannot be negative.");
+        }
         this.value = value;
         this.units = units;
     }
