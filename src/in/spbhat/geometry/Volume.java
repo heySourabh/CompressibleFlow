@@ -35,6 +35,9 @@ public class Volume {
     private final Units units;
 
     public Volume(double value, Units units) {
+        if(value < 0) {
+            throw new IllegalArgumentException("Volume cannot be negative.");
+        }
         this.value = value;
         this.units = units;
     }

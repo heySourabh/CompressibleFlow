@@ -9,8 +9,15 @@ import org.junit.jupiter.api.Test;
 
 import static in.spbhat.geometry.Volume.Units.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class VolumeTest {
+    @Test
+    void throw_exception_if_volume_is_negative() {
+        var error = assertThrows(IllegalArgumentException.class, () -> new Volume(-1, cubic_m));
+        assertEquals("Volume cannot be negative.", error.getMessage());
+        assertEquals("0 m^3", new Volume(0, cubic_m).toString());
+    }
 
     @Test
     void convertToTest() {
