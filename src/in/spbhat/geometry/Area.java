@@ -34,6 +34,9 @@ public class Area {
     private final Units units;
 
     public Area(double value, Units units) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Area cannot be negative.");
+        }
         this.value = value;
         this.units = units;
     }

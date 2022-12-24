@@ -9,8 +9,15 @@ import org.junit.jupiter.api.Test;
 
 import static in.spbhat.geometry.Area.Units.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AreaTest {
+    @Test
+    void throw_exception_if_area_is_negative() {
+        var error = assertThrows(IllegalArgumentException.class, () -> new Area(-1, sq_m));
+        assertEquals("Area cannot be negative.", error.getMessage());
+        assertEquals("0 m^2", new Area(0, sq_m).toString());
+    }
 
     @Test
     void areaConversionTest() {
