@@ -36,6 +36,9 @@ public class Mass {
     private final Units units;
 
     public Mass(double value, Units units) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Mass cannot be negative.");
+        }
         this.value = value;
         this.units = units;
     }

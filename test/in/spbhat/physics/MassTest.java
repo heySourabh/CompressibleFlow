@@ -14,8 +14,16 @@ import static in.spbhat.geometry.Volume.Units.cubic_m;
 import static in.spbhat.physics.Mass.Units.kg;
 import static in.spbhat.physics.Mass.Units.pound;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MassTest {
+
+    @Test
+    void throw_exception_if_mass_is_negative() {
+        var error = assertThrows(IllegalArgumentException.class, () -> new Mass(-1, kg));
+        assertEquals("Mass cannot be negative.", error.getMessage());
+        assertEquals("0 kg", new Mass(0, kg).toString());
+    }
 
     @Test
     void in() {
