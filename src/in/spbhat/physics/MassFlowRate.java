@@ -37,6 +37,9 @@ public class MassFlowRate {
     private final Units units;
 
     public MassFlowRate(double value, Units units) {
+        if (value < 0) {
+            throw new IllegalArgumentException("MassFlowRate cannot be negative.");
+        }
         this.value = value;
         this.units = units;
     }

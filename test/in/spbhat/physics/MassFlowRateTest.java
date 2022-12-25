@@ -14,8 +14,15 @@ import static in.spbhat.geometry.Area.Units.sq_m;
 import static in.spbhat.physics.MassFlowRate.Units.kg_s;
 import static in.spbhat.physics.MassFlowRate.Units.pound_s;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MassFlowRateTest {
+    @Test
+    void throw_exception_if_MassFlowRate_is_negative() {
+        var error = assertThrows(IllegalArgumentException.class, () -> new MassFlowRate(-1, kg_s));
+        assertEquals("MassFlowRate cannot be negative.", error.getMessage());
+        assertEquals("0 kg/s", new MassFlowRate(0, kg_s).toString());
+    }
 
     @Test
     void in() {
