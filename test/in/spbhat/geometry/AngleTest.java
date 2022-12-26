@@ -36,6 +36,50 @@ class AngleTest {
         assertEquals(-135, new Angle(-135, degrees).in(degrees));
         assertEquals(-179, new Angle(-179, degrees).in(degrees));
         assertEquals(-180, new Angle(-180, degrees).in(degrees));
+
+        // > +360 n
+        assertEquals(10, new Angle(360 + 10, degrees).in(degrees));
+        assertEquals(105, new Angle(360 + 105, degrees).in(degrees));
+        assertEquals(-10, new Angle(360 - 10, degrees).in(degrees));
+        assertEquals(-105, new Angle(360 - 105, degrees).in(degrees));
+
+        assertEquals(10, new Angle(360 * 2 + 10, degrees).in(degrees));
+        assertEquals(105, new Angle(360 * 4 + 105, degrees).in(degrees));
+        assertEquals(-10, new Angle(360 * 8 - 10, degrees).in(degrees));
+        assertEquals(-105, new Angle(360 * 7 - 105, degrees).in(degrees));
+
+        // > -360 n
+        assertEquals(10, new Angle(-360 + 10, degrees).in(degrees));
+        assertEquals(105, new Angle(-360 + 105, degrees).in(degrees));
+        assertEquals(-10, new Angle(-360 - 10, degrees).in(degrees));
+        assertEquals(-105, new Angle(-360 - 105, degrees).in(degrees));
+
+        assertEquals(10, new Angle(-360 * 5 + 10, degrees).in(degrees));
+        assertEquals(105, new Angle(-360 * 2 + 105, degrees).in(degrees));
+        assertEquals(-10, new Angle(-360 * 6 - 10, degrees).in(degrees));
+        assertEquals(-105, new Angle(-360 * 3 - 105, degrees).in(degrees));
+
+        // +180 to +360
+        assertEquals(180, new Angle(180, degrees).in(degrees));
+        assertEquals(-179, new Angle(180 + 1, degrees).in(degrees));
+        assertEquals(-135, new Angle(180 + 45, degrees).in(degrees));
+        assertEquals(-91, new Angle(180 + 89, degrees).in(degrees));
+        assertEquals(-90, new Angle(180 + 90, degrees).in(degrees));
+        assertEquals(-89, new Angle(180 + 91, degrees).in(degrees));
+        assertEquals(-45, new Angle(180 + 135, degrees).in(degrees));
+        assertEquals(-1, new Angle(180 + 179, degrees).in(degrees));
+        assertEquals(0, new Angle(180 + 180, degrees).in(degrees));
+
+        // -180 to -360
+        assertEquals(-180, new Angle(-180, degrees).in(degrees));
+        assertEquals(179, new Angle(-180 - 1, degrees).in(degrees));
+        assertEquals(135, new Angle(-180 - 45, degrees).in(degrees));
+        assertEquals(91, new Angle(-180 - 89, degrees).in(degrees));
+        assertEquals(90, new Angle(-180 - 90, degrees).in(degrees));
+        assertEquals(89, new Angle(-180 - 91, degrees).in(degrees));
+        assertEquals(45, new Angle(-180 - 135, degrees).in(degrees));
+        assertEquals(1, new Angle(-180 - 179, degrees).in(degrees));
+        assertEquals(-0.0, new Angle(-180 - 180, degrees).in(degrees));
     }
 
     @Test
@@ -82,9 +126,7 @@ class AngleTest {
 
     @Test
     void toStringTest() {
-        Angle angle1 = new Angle(45, degrees);
-        assertEquals("45°", angle1.toString());
-        Angle angle2 = new Angle(3.0 / 2.0 * PI, radians);
-        assertEquals("1.5π rad", angle2.toString());
+        assertEquals("45°", new Angle(45, degrees).toString());
+        assertEquals("-0.5π rad", new Angle(1.5 * PI, radians).toString());
     }
 }

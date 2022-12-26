@@ -9,11 +9,12 @@ import in.spbhat.util.Formatter;
 
 import static in.spbhat.geometry.Angle.Units.degrees;
 import static in.spbhat.geometry.Angle.Units.radians;
+import static java.lang.Math.PI;
 
 public class Angle {
     public enum Units {
         degrees(1.0, "°"),
-        radians(180.0 / Math.PI, "rad");
+        radians(180.0 / PI, "rad");
 
         private final double conversion;
         private final String unitStr;
@@ -28,7 +29,23 @@ public class Angle {
     private final Units units;
 
     public Angle(double value, Units units) {
-        this.value = value;
+        double totalAngle = switch (units) {
+            case degrees -> 360;
+            case radians -> 2 * PI;
+        };
+        double halfTotalAngle = totalAngle / 2;
+
+        double validAngle = value % totalAngle;
+        double constrainedAngle;
+        if (validAngle > halfTotalAngle) {
+            constrainedAngle = validAngle - totalAngle;
+        } else if (validAngle < -halfTotalAngle) {
+            constrainedAngle = validAngle + totalAngle;
+        } else {
+            constrainedAngle = validAngle;
+        }
+
+        this.value = constrainedAngle;
         this.units = units;
     }
 
@@ -60,7 +77,7 @@ public class Angle {
     @Override
     public String toString() {
         if (this.units == radians)
-            return Formatter.doubleToString(this.value / Math.PI) + "π rad";
+            return Formatter.doubleToString(this.value / PI) + "π rad";
         else
             return Formatter.doubleToString(this.value) + this.units.unitStr;
     }
