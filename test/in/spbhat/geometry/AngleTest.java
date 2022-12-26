@@ -13,6 +13,30 @@ import static java.lang.Math.PI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AngleTest {
+    @Test
+    void test_that_angle_is_constrained_within_negative_to_positive_180_degrees() {
+        // +0 to +180
+        assertEquals(0, new Angle(0, degrees).in(degrees));
+        assertEquals(1, new Angle(1, degrees).in(degrees));
+        assertEquals(45, new Angle(45, degrees).in(degrees));
+        assertEquals(89, new Angle(89, degrees).in(degrees));
+        assertEquals(90, new Angle(90, degrees).in(degrees));
+        assertEquals(91, new Angle(91, degrees).in(degrees));
+        assertEquals(135, new Angle(135, degrees).in(degrees));
+        assertEquals(179, new Angle(179, degrees).in(degrees));
+        assertEquals(180, new Angle(180, degrees).in(degrees));
+
+        // -0 to -180
+        assertEquals(0, new Angle(-0, degrees).in(degrees));
+        assertEquals(-1, new Angle(-1, degrees).in(degrees));
+        assertEquals(-45, new Angle(-45, degrees).in(degrees));
+        assertEquals(-89, new Angle(-89, degrees).in(degrees));
+        assertEquals(-90, new Angle(-90, degrees).in(degrees));
+        assertEquals(-91, new Angle(-91, degrees).in(degrees));
+        assertEquals(-135, new Angle(-135, degrees).in(degrees));
+        assertEquals(-179, new Angle(-179, degrees).in(degrees));
+        assertEquals(-180, new Angle(-180, degrees).in(degrees));
+    }
 
     @Test
     void convertInTest() {
