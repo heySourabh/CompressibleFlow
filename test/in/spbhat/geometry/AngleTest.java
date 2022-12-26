@@ -83,6 +83,59 @@ class AngleTest {
     }
 
     @Test
+    void test_that_angle_is_constrained_within_negative_to_positive_PI_radians() {
+        // +0 to +PI
+        assertEquals(0, new Angle(0, radians).in(radians));
+        assertEquals(PI / 4, new Angle(PI / 4, radians).in(radians));
+        assertEquals(PI / 2, new Angle(PI / 2, radians).in(radians));
+        assertEquals(3 * PI / 4, new Angle(3 * PI / 4, radians).in(radians));
+        assertEquals(PI, new Angle(PI, radians).in(radians));
+
+        // -0 to -PI
+        assertEquals(0, new Angle(-0, radians).in(radians));
+        assertEquals(-PI / 4, new Angle(-PI / 4, radians).in(radians));
+        assertEquals(-PI / 2, new Angle(-PI / 2, radians).in(radians));
+        assertEquals(-3 * PI / 4, new Angle(-3 * PI / 4, radians).in(radians));
+        assertEquals(-PI, new Angle(-PI, radians).in(radians));
+
+        // > +2 PI n
+        assertEquals(1, new Angle(2 * PI + 1, radians).in(radians));
+        assertEquals(2, new Angle(2 * PI + 2, radians).in(radians));
+        assertEquals(-1, new Angle(2 * PI - 1, radians).in(radians));
+        assertEquals(-2, new Angle(2 * PI - 2, radians).in(radians));
+
+        assertEquals(1, new Angle(2 * PI * 2 + 1, radians).in(radians));
+        assertEquals(2, new Angle(2 * PI * 4 + 2, radians).in(radians));
+        assertEquals(-1, new Angle(2 * PI * 8 - 1, radians).in(radians));
+        assertEquals(-2, new Angle(2 * PI * 7 - 2, radians).in(radians));
+
+        // > -2 PI n
+        assertEquals(1, new Angle(-2 * PI + 1, radians).in(radians));
+        assertEquals(2, new Angle(-2 * PI + 2, radians).in(radians));
+        assertEquals(-1, new Angle(-2 * PI - 1, radians).in(radians));
+        assertEquals(-2, new Angle(-2 * PI - 2, radians).in(radians));
+
+        assertEquals(1, new Angle(-2 * PI * 5 + 1, radians).in(radians));
+        assertEquals(2, new Angle(-2 * PI * 2 + 2, radians).in(radians));
+        assertEquals(-1, new Angle(-2 * PI * 6 - 1, radians).in(radians));
+        assertEquals(-2, new Angle(-2 * PI * 3 - 2, radians).in(radians));
+
+        // +PI to +2 PI
+        assertEquals(PI, new Angle(PI, radians).in(radians));
+        assertEquals(-3 * PI / 4, new Angle(PI + PI / 4, radians).in(radians));
+        assertEquals(-PI / 2, new Angle(PI + PI / 2, radians).in(radians));
+        assertEquals(-PI / 4, new Angle(PI + 3 * PI / 4, radians).in(radians));
+        assertEquals(0, new Angle(PI + PI, radians).in(radians));
+
+        // -PI to -2 PI
+        assertEquals(-PI, new Angle(-PI, radians).in(radians));
+        assertEquals(3 * PI / 4, new Angle(-PI - PI / 4, radians).in(radians));
+        assertEquals(PI / 2, new Angle(-PI - PI / 2, radians).in(radians));
+        assertEquals(PI / 4, new Angle(-PI - 3 * PI / 4, radians).in(radians));
+        assertEquals(-0.0, new Angle(-PI - PI, radians).in(radians));
+    }
+
+    @Test
     void convertInTest() {
         assertEquals(PI / 3, new Angle(60, degrees).in(radians));
         assertEquals(60, new Angle(PI / 3.0, radians).in(degrees), 1e-12);
