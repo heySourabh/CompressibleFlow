@@ -16,7 +16,7 @@ class MolarMassTest {
     @Test
     void throw_exception_if_MolarMass_is_negative() {
         var error = assertThrows(IllegalArgumentException.class, () -> new MolarMass(-1, moles_gram));
-        assertEquals("Molar mass cannot be negative.", error.getMessage());
+        assertEquals("MolarMass cannot be negative.", error.getMessage());
         assertEquals("0 moles/gram", new MolarMass(0, moles_gram).toString());
     }
 

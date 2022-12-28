@@ -17,7 +17,7 @@ class SpecificHeatTest {
     void throw_exception_when_value_is_negative() {
         var error = assertThrows(IllegalArgumentException.class, () -> new SpecificHeat(-1, J_kgK) {
         });
-        assertEquals("Specific heat cannot be negative.", error.getMessage());
+        assertEquals("SpecificHeat cannot be negative.", error.getMessage());
         assertEquals("0 J/kg-K",
                 new SpecificHeat(0, J_kgK) {
                 }.toString());

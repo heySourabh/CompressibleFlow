@@ -28,7 +28,7 @@ public class MolarMass {
 
     public MolarMass(double value, Units units) {
         if (value < 0) {
-            throw new IllegalArgumentException("Molar mass cannot be negative.");
+            throw new IllegalArgumentException("MolarMass cannot be negative.");
         }
         this.value = value;
         this.units = units;

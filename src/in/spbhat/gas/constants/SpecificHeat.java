@@ -31,7 +31,7 @@ public abstract class SpecificHeat {
 
     public SpecificHeat(double value, Units units) {
         if (value < 0) {
-            throw new IllegalArgumentException("Specific heat cannot be negative.");
+            throw new IllegalArgumentException("SpecificHeat cannot be negative.");
         }
         this.value = value;
         this.units = units;
