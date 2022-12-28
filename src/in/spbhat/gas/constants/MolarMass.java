@@ -36,7 +36,9 @@ public class MolarMass {
 
     public double in(Units units) {
         // Only moles/gram is available, hence no need of conversion.
-        return this.value;
+        return switch (units) {
+            case moles_gram -> value;
+        };
     }
 
     @Override
