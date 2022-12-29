@@ -190,6 +190,21 @@ class AngleTest {
     }
 
     @Test
+    void timesTest() {
+        assertEquals(20, new Angle(10, degrees).times(2).in(degrees));
+        assertEquals(30, new Angle(10, degrees).times(3).in(degrees));
+        assertEquals(120, new Angle(10, degrees).times(12).in(degrees));
+        assertEquals(180, new Angle(10, degrees).times(18).in(degrees));
+        assertEquals(-170, new Angle(10, degrees).times(19).in(degrees));
+        assertEquals(0, new Angle(10, degrees).times(36).in(degrees));
+        assertEquals(10, new Angle(10, degrees).times(37).in(degrees));
+
+        assertEquals(90, new Angle(PI / 4, radians).times(2).in(degrees));
+        assertEquals(PI / 2, new Angle(PI / 4, radians).times(2).in(radians));
+        assertEquals(PI / 4, new Angle(PI / 8, radians).times(18).in(radians));
+    }
+
+    @Test
     void toStringTest() {
         assertEquals("45°", new Angle(45, degrees).toString());
         assertEquals("-0.5π rad", new Angle(1.5 * PI, radians).toString());

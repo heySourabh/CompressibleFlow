@@ -82,6 +82,10 @@ public class Angle {
         return new Angle(Math.atan(value), radians).to(degrees);
     }
 
+    public Angle times(double multiple) {
+        return new Angle(value * multiple, units);
+    }
+
     @Override
     public String toString() {
         if (this.units == radians)
