@@ -8,7 +8,7 @@ package in.spbhat.physics;
 import in.spbhat.geometry.Angle;
 import in.spbhat.util.Formatter;
 
-import static in.spbhat.geometry.Angle.asin;
+import static in.spbhat.geometry.Angle.arcSin;
 import static in.spbhat.geometry.Angle.sin;
 import static java.lang.Math.abs;
 
@@ -31,7 +31,7 @@ public class Mach {
         if (machRegime() == MachRegime.Subsonic) {
             throw new IllegalStateException("Cannot compute Mach angle for 'subsonic' flow: " + this);
         }
-        return asin(1.0 / machNumber);
+        return arcSin(1.0 / machNumber);
     }
 
     public MachRegime machRegime() {

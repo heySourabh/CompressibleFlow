@@ -66,11 +66,11 @@ public class Angle {
         return Math.cos(angle.in(radians));
     }
 
-    public static Angle asin(double value) {
+    public static Angle arcSin(double value) {
         return new Angle(Math.asin(value), radians).to(degrees);
     }
 
-    public static Angle acos(double value) {
+    public static Angle arcCos(double value) {
         return new Angle(Math.acos(value), radians).to(degrees);
     }
 

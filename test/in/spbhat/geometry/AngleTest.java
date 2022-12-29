@@ -169,12 +169,12 @@ class AngleTest {
 
     @Test
     void asinTest() {
-        assertEquals(30, Angle.asin(0.5).in(degrees), 1e-12);
+        assertEquals(30, Angle.arcSin(0.5).in(degrees), 1e-12);
     }
 
     @Test
     void acosTest() {
-        assertEquals(60, Angle.acos(0.5).in(degrees), 1e-12);
+        assertEquals(60, Angle.arcCos(0.5).in(degrees), 1e-12);
     }
 
     @Test
