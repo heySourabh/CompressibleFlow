@@ -168,13 +168,25 @@ class AngleTest {
     }
 
     @Test
-    void asinTest() {
+    void tanTest() {
+        assertEquals(1, Angle.tan(new Angle(45, degrees)), 1e-12);
+        assertEquals(1, Angle.tan(new Angle(PI / 4, radians)), 1e-12);
+    }
+
+    @Test
+    void arcSinTest() {
         assertEquals(30, Angle.arcSin(0.5).in(degrees), 1e-12);
     }
 
     @Test
-    void acosTest() {
+    void arcCosTest() {
         assertEquals(60, Angle.arcCos(0.5).in(degrees), 1e-12);
+    }
+
+    @Test
+    void arcTanTest() {
+        assertEquals(45, Angle.arcTan(1).in(degrees));
+        assertEquals(PI / 4, Angle.arcTan(1).in(radians));
     }
 
     @Test

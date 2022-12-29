@@ -66,12 +66,20 @@ public class Angle {
         return Math.cos(angle.in(radians));
     }
 
+    public static double tan(Angle angle) {
+        return Math.tan(angle.in(radians));
+    }
+
     public static Angle arcSin(double value) {
         return new Angle(Math.asin(value), radians).to(degrees);
     }
 
     public static Angle arcCos(double value) {
         return new Angle(Math.acos(value), radians).to(degrees);
+    }
+
+    public static Angle arcTan(double value) {
+        return new Angle(Math.atan(value), radians).to(degrees);
     }
 
     @Override
