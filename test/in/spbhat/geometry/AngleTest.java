@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static in.spbhat.geometry.Angle.Units.degrees;
 import static in.spbhat.geometry.Angle.Units.radians;
 import static java.lang.Math.PI;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AngleTest {
     @Test
@@ -202,6 +202,32 @@ class AngleTest {
         assertEquals(90, new Angle(PI / 4, radians).times(2).in(degrees));
         assertEquals(PI / 2, new Angle(PI / 4, radians).times(2).in(radians));
         assertEquals(PI / 4, new Angle(PI / 8, radians).times(18).in(radians));
+    }
+
+    @Test
+    void greaterThanTest() {
+        assertTrue(new Angle(45, degrees).isGreaterThan(new Angle(44, degrees)));
+        assertFalse(new Angle(44, degrees).isGreaterThan(new Angle(44, degrees)));
+        assertFalse(new Angle(43, degrees).isGreaterThan(new Angle(44, degrees)));
+        assertTrue(new Angle(46, degrees).isGreaterThan(new Angle(PI / 4, radians)));
+
+        assertTrue(new Angle(-44, degrees).isGreaterThan(new Angle(-45, degrees)));
+        assertFalse(new Angle(-44, degrees).isGreaterThan(new Angle(-44, degrees)));
+        assertFalse(new Angle(-44, degrees).isGreaterThan(new Angle(-43, degrees)));
+        assertTrue(new Angle(-PI / 4, radians).isGreaterThan(new Angle(-46, degrees)));
+    }
+
+    @Test
+    void lessThanTest() {
+        assertTrue(new Angle(40, degrees).isLessThan(new Angle(45, degrees)));
+        assertFalse(new Angle(45, degrees).isLessThan(new Angle(45, degrees)));
+        assertFalse(new Angle(46, degrees).isLessThan(new Angle(45, degrees)));
+        assertTrue(new Angle(45, degrees).isLessThan(new Angle(PI / 2, radians)));
+
+        assertTrue(new Angle(-45, degrees).isLessThan(new Angle(-40, degrees)));
+        assertFalse(new Angle(-45, degrees).isLessThan(new Angle(-45, degrees)));
+        assertFalse(new Angle(-45, degrees).isLessThan(new Angle(-46, degrees)));
+        assertTrue(new Angle(-PI / 2, radians).isLessThan(new Angle(-45, degrees)));
     }
 
     @Test

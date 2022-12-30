@@ -86,6 +86,14 @@ public class Angle {
         return new Angle(value * multiple, units);
     }
 
+    public boolean isGreaterThan(Angle other) {
+        return this.in(degrees) > other.in(degrees);
+    }
+
+    public boolean isLessThan(Angle other) {
+        return this.in(degrees) < other.in(degrees);
+    }
+
     @Override
     public String toString() {
         if (this.units == radians)
