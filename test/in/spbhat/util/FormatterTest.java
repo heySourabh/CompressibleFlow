@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FormatterTest {
-
     @Test
     void doubleToString_decimals() {
         assertEquals("1.23457", Formatter.doubleToString(1.2345678, 6));
@@ -27,6 +26,12 @@ class FormatterTest {
         assertEquals("45", Formatter.doubleToString(45.00002, 6));
         assertEquals("4000000", Formatter.doubleToString(4000000.2, 7));
 
+    }
+
+    @Test
+    void numbers_close_to_zero() {
+        assertEquals("1e-07", Formatter.doubleToString(1e-7, 6));
+        assertEquals("0", Formatter.doubleToString(1e-7, 3));
     }
 
     @Test

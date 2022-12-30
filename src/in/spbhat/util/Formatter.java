@@ -5,9 +5,14 @@
 
 package in.spbhat.util;
 
+import static java.lang.Math.*;
+
 public class Formatter {
     public static String doubleToString(double value, int numSignificantDigits) {
         String formatStr = String.format("%%.%dg", numSignificantDigits);
+        if (abs(value - round(value)) < pow(10, -2 * numSignificantDigits)) {
+            value = round(value);
+        }
         String valueStr = String.format(formatStr, value);
         return removeTrailingZeros(valueStr);
     }
