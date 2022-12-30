@@ -22,22 +22,22 @@ public class ObliqueShock {
         this.gamma = gas.gamma();
     }
 
-    public DeflectionAngle theta(Mach upstreamMach, ShockAngle shockAngle) {
+    public DeflectionAngle theta(Mach upstreamMach, ShockAngle beta) {
         Angle machAngle = upstreamMach.machAngle();
         Angle rightAngle = new Angle(90, degrees);
-        if (shockAngle.isGreaterThan(rightAngle) || shockAngle.isLessThan(machAngle)) {
+        if (beta.isGreaterThan(rightAngle) || beta.isLessThan(machAngle)) {
             throw new IllegalArgumentException(
                     "The value of shock angle is out of range [%s, %s] for %s.".formatted(machAngle, rightAngle, upstreamMach));
         }
-        return new DeflectionAngle(arcTan(tanTheta(upstreamMach, shockAngle)));
+        return new DeflectionAngle(arcTan(tanTheta(upstreamMach, beta)));
     }
 
-    private double tanTheta(Mach upstreamMach, ShockAngle shockAngle) {
+    private double tanTheta(Mach upstreamMach, ShockAngle beta) {
         double M1 = upstreamMach.machNumber;
         double M1sqr = M1 * M1;
-        double sinBetaSqr = pow(sin(shockAngle), 2);
-        double numerator = 2 * cot(shockAngle) * (M1sqr * sinBetaSqr - 1);
-        double denominator = 2 + M1sqr * (gamma + cos(shockAngle.times(2.0)));
+        double sinBetaSqr = pow(sin(beta), 2);
+        double numerator = 2 * cot(beta) * (M1sqr * sinBetaSqr - 1);
+        double denominator = 2 + M1sqr * (gamma + cos(beta.times(2.0)));
 
         return numerator / denominator;
     }
