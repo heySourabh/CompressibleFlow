@@ -60,4 +60,14 @@ class ObliqueShockTest {
                 () -> new ObliqueShock(gas).theta(new Mach(1.5), new ShockAngle(91, degrees)));
         assertEquals("The value of shock angle is out of range [41.8103°, 90°] for Mach 1.5.", error.getMessage());
     }
+
+    @Test
+    void betaAtThetaMaxTest() {
+        assertEquals("64.669°", new ObliqueShock(gas).betaAtThetaMax(new Mach(2)).toString());
+    }
+
+    @Test
+    void thetaMaxTest() {
+        assertEquals("22.9735°", new ObliqueShock(gas).thetaMax(new Mach(2)).toString());
+    }
 }
