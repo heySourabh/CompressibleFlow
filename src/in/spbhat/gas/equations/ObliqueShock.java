@@ -26,7 +26,7 @@ public class ObliqueShock {
     public TurnAngle theta(Mach upstreamMach, ShockAngle beta) {
         Angle machAngle = upstreamMach.machAngle();
         Angle rightAngle = new Angle(90, degrees);
-        if (beta.isGreaterThan(rightAngle) || beta.isLessThan(machAngle)) {
+        if (beta.isLessThan(machAngle) || beta.isGreaterThan(rightAngle)) {
             throw new IllegalArgumentException(
                     "The value of shock angle is out of range [%s, %s] for %s.".formatted(machAngle, rightAngle, upstreamMach));
         }
