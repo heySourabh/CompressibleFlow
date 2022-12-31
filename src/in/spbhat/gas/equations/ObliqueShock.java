@@ -23,9 +23,11 @@ public class ObliqueShock {
         WEAK_SHOCK, STRONG_SHOCK
     }
 
+    private final Gas gas;
     private final double gamma;
 
     public ObliqueShock(Gas gas) {
+        this.gas = gas;
         this.gamma = gas.gamma();
     }
 
@@ -89,6 +91,54 @@ public class ObliqueShock {
         double sinBetaMax = sqrt(t1 - t2 * (1 - sqrt(t3)));
 
         return new ShockAngle(arcSin(sinBetaMax));
+    }
+
+    public Mach Mn1(Mach upstreamMach, ShockAngle beta) {
+        double Mn1 = upstreamMach.machNumber * sin(beta);
+        return new Mach(Mn1);
+    }
+
+    public Mach Mn1(Mach upstreamMach, TurnAngle theta, Strength shockStrength) {
+        ShockAngle beta = beta(upstreamMach, theta, shockStrength);
+        return Mn1(upstreamMach, beta);
+    }
+
+    public Mach Mn1(Mach upstreamMach, TurnAngle theta) {
+        return Mn1(upstreamMach, theta, Strength.WEAK_SHOCK);
+    }
+
+    public Mach Mn2(Mach upstreamMach, ShockAngle beta) {
+        Mach Mn1 = Mn1(upstreamMach, beta);
+        return new NormalShock(gas).M2(Mn1);
+    }
+
+    public Mach Mn2(Mach upstreamMach, TurnAngle theta, Strength shockStrength) {
+        Mach Mn1 = Mn1(upstreamMach, theta, shockStrength);
+        return new NormalShock(gas).M2(Mn1);
+    }
+
+    public Mach Mn2(Mach upstreamMach, TurnAngle theta) {
+        return Mn2(upstreamMach, theta, Strength.WEAK_SHOCK);
+    }
+
+    public Mach M2(Mach upstreamMach, TurnAngle theta, Strength shockStrength) {
+        ShockAngle beta = beta(upstreamMach, theta, shockStrength);
+        Angle betaMinusTheta = new Angle(beta.in(degrees) - theta.in(degrees), degrees);
+        Mach Mn2 = Mn2(upstreamMach, beta);
+        double M2 = Mn2.machNumber / sin(betaMinusTheta);
+        return new Mach(M2);
+    }
+
+    public Mach M2(Mach upstreamMach, TurnAngle theta) {
+        return M2(upstreamMach, theta, Strength.WEAK_SHOCK);
+    }
+
+    public Mach M2(Mach upstreamMach, ShockAngle beta) {
+        TurnAngle theta = theta(upstreamMach, beta);
+        Angle betaMinusTheta = new Angle(beta.in(degrees) - theta.in(degrees), degrees);
+        Mach Mn2 = Mn2(upstreamMach, beta);
+        double M2 = Mn2.machNumber / sin(betaMinusTheta);
+        return new Mach(M2);
     }
 
     private double tanTheta(Mach upstreamMach, ShockAngle beta) {

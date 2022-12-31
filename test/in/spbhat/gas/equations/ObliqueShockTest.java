@@ -124,4 +124,65 @@ class ObliqueShockTest {
     void thetaMaxTest() {
         assertEquals("22.9735°", new ObliqueShock(gas).thetaMax(new Mach(2)).toString());
     }
+
+    @Test
+    void Mn1Test_with_beta() {
+        assertEquals("Mach 1.25",
+                new ObliqueShock(gas).Mn1(new Mach(2.5), new ShockAngle(30, degrees)).toString());
+    }
+
+    @Test
+    void Mn1Test_with_theta() {
+        assertEquals("Mach 1.11278",
+                new ObliqueShock(gas).Mn1(new Mach(1.5), new TurnAngle(5, degrees)).toString());
+        assertEquals("Mach 1.11278",
+                new ObliqueShock(gas).Mn1(new Mach(1.5), new TurnAngle(5, degrees), WEAK_SHOCK).toString());
+        assertEquals("Mach 1.49175",
+                new ObliqueShock(gas).Mn1(new Mach(1.5), new TurnAngle(5, degrees), STRONG_SHOCK).toString());
+    }
+
+    @Test
+    void Mn2Test_with_beta() {
+        assertEquals("Mach 0.553195",
+                new ObliqueShock(gas).Mn2(new Mach(5.1), new ShockAngle(25, degrees)).toString());
+    }
+
+    @Test
+    void Mn2Test_with_theta() {
+        assertEquals("Mach 0.815192",
+                new ObliqueShock(gas).Mn2(new Mach(3.4), new TurnAngle(6, degrees)).toString());
+        assertEquals("Mach 0.815192",
+                new ObliqueShock(gas).Mn2(new Mach(3.4), new TurnAngle(6, degrees), WEAK_SHOCK).toString());
+        assertEquals("Mach 0.455279",
+                new ObliqueShock(gas).Mn2(new Mach(3.4), new TurnAngle(6, degrees), STRONG_SHOCK).toString());
+    }
+
+    @Test
+    void M2Test_with_beta() {
+        assertEquals("Mach 0.921597",
+                new ObliqueShock(gas).M2(new Mach(1.75), new ShockAngle(65, degrees)).toString());
+        assertEquals("Mach 1.41486",
+                new ObliqueShock(gas).M2(new Mach(1.75), new ShockAngle(45, degrees)).toString());
+
+        assertEquals(new Mach(4.7).toString(),
+                new ObliqueShock(gas).M2(new Mach(4.7),
+                        new ShockAngle(new Mach(4.7).machAngle())).toString());
+        assertEquals(new NormalShock(gas).M2(new Mach(12)).toString(),
+                new ObliqueShock(gas).M2(new Mach(12), new ShockAngle(90, degrees)).toString());
+    }
+
+    @Test
+    void M2Test_with_theta() {
+        assertEquals("Mach 2.08593",
+                new ObliqueShock(gas).M2(new Mach(2.5), new TurnAngle(10, degrees)).toString());
+        assertEquals("Mach 2.08593",
+                new ObliqueShock(gas).M2(new Mach(2.5), new TurnAngle(10, degrees), WEAK_SHOCK).toString());
+        assertEquals("Mach 0.530426",
+                new ObliqueShock(gas).M2(new Mach(2.5), new TurnAngle(10, degrees), STRONG_SHOCK).toString());
+
+        assertEquals(new Mach(2.47).toString(),
+                new ObliqueShock(gas).M2(new Mach(2.47), new TurnAngle(0, degrees)).toString());
+        assertEquals(new NormalShock(gas).M2(new Mach(2.47)).toString(),
+                new ObliqueShock(gas).M2(new Mach(2.47), new TurnAngle(0, degrees), STRONG_SHOCK).toString());
+    }
 }
