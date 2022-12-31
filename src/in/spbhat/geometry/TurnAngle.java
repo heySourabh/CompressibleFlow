@@ -7,12 +7,12 @@ package in.spbhat.geometry;
 
 import static in.spbhat.geometry.Angle.Units.degrees;
 
-public class DeflectionAngle extends Angle {
-    public DeflectionAngle(double value, Units units) {
+public class TurnAngle extends Angle {
+    public TurnAngle(double value, Units units) {
         super(value, units);
     }
 
-    public DeflectionAngle(Angle angle) {
+    public TurnAngle(Angle angle) {
         super(angle.in(degrees), degrees);
     }
 }

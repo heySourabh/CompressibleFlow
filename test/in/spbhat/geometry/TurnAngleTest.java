@@ -12,15 +12,15 @@ import static in.spbhat.geometry.Angle.Units.radians;
 import static java.lang.Math.PI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DeflectionAngleTest {
+class TurnAngleTest {
     @Test
     void constructorTests() {
         Angle angle = new Angle(20, degrees);
-        assertEquals(angle.toString(), new DeflectionAngle(angle).toString());
-        assertEquals(angle.toString(), new DeflectionAngle(20, degrees).toString());
+        assertEquals(angle.toString(), new TurnAngle(angle).toString());
+        assertEquals(angle.toString(), new TurnAngle(20, degrees).toString());
 
         angle = new Angle(PI / 4, radians);
-        assertEquals(angle.to(degrees).toString(), new DeflectionAngle(angle).toString());
-        assertEquals(angle.toString(), new DeflectionAngle(PI / 4, radians).toString());
+        assertEquals(angle.to(degrees).toString(), new TurnAngle(angle).toString());
+        assertEquals(angle.toString(), new TurnAngle(PI / 4, radians).toString());
     }
 }

@@ -7,8 +7,8 @@ package in.spbhat.gas.equations;
 
 import in.spbhat.gas.Gas;
 import in.spbhat.geometry.Angle;
-import in.spbhat.geometry.DeflectionAngle;
 import in.spbhat.geometry.ShockAngle;
+import in.spbhat.geometry.TurnAngle;
 import in.spbhat.physics.Mach;
 
 import static in.spbhat.geometry.Angle.Units.degrees;
@@ -22,14 +22,14 @@ public class ObliqueShock {
         this.gamma = gas.gamma();
     }
 
-    public DeflectionAngle theta(Mach upstreamMach, ShockAngle beta) {
+    public TurnAngle theta(Mach upstreamMach, ShockAngle beta) {
         Angle machAngle = upstreamMach.machAngle();
         Angle rightAngle = new Angle(90, degrees);
         if (beta.isGreaterThan(rightAngle) || beta.isLessThan(machAngle)) {
             throw new IllegalArgumentException(
                     "The value of shock angle is out of range [%s, %s] for %s.".formatted(machAngle, rightAngle, upstreamMach));
         }
-        return new DeflectionAngle(arcTan(tanTheta(upstreamMach, beta)));
+        return new TurnAngle(arcTan(tanTheta(upstreamMach, beta)));
     }
 
     private double tanTheta(Mach upstreamMach, ShockAngle beta) {
