@@ -10,6 +10,8 @@ import in.spbhat.geometry.Angle;
 import in.spbhat.geometry.ShockAngle;
 import in.spbhat.geometry.TurnAngle;
 import in.spbhat.physics.Mach;
+import in.spbhat.util.Numerical;
+import in.spbhat.util.Numerical.Function;
 
 import static in.spbhat.geometry.Angle.Units.degrees;
 import static in.spbhat.geometry.Angle.*;
@@ -17,13 +19,24 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class ObliqueShock {
+    public enum Strength {
+        WEAK_SHOCK, STRONG_SHOCK
+    }
+
     private final double gamma;
 
     public ObliqueShock(Gas gas) {
         this.gamma = gas.gamma();
     }
 
+    private static void validateSupersonic(Mach mach) {
+        if (mach.machRegime() == Mach.MachRegime.Subsonic) {
+            throw new IllegalArgumentException("Oblique shock: Upstream Mach number is subsonic (" + mach + ").");
+        }
+    }
+
     public TurnAngle theta(Mach upstreamMach, ShockAngle beta) {
+        validateSupersonic(upstreamMach);
         Angle machAngle = upstreamMach.machAngle();
         Angle rightAngle = new Angle(90, degrees);
         if (beta.isLessThan(machAngle) || beta.isGreaterThan(rightAngle)) {
@@ -31,6 +44,34 @@ public class ObliqueShock {
                     "The value of shock angle is out of range [%s, %s] for %s.".formatted(machAngle, rightAngle, upstreamMach));
         }
         return new TurnAngle(arcTan(tanTheta(upstreamMach, beta)));
+    }
+
+    public ShockAngle beta(Mach upstreamMach, TurnAngle theta, Strength shockStrength) {
+        validateSupersonic(upstreamMach);
+        Angle thetaMax = thetaMax(upstreamMach);
+        Angle zero = new Angle(0, degrees);
+        if (theta.isLessThan(zero) || theta.isGreaterThan(thetaMax)) {
+            String message = "Attached shock solution is not possible for turn angle %s.\n".formatted(theta);
+            message += "The turn angle must be in range [%s, %s] for %s.".formatted(zero, thetaMax, upstreamMach);
+            throw new IllegalArgumentException(message);
+        }
+
+        ShockAngle initBeta = switch (shockStrength) {
+            case WEAK_SHOCK -> new ShockAngle(upstreamMach.machAngle());
+            case STRONG_SHOCK -> new ShockAngle(90, degrees);
+        };
+
+        double tanTheta = tan(theta);
+        Function equation = (beta) -> tanTheta - tanTheta(upstreamMach, new ShockAngle(beta, degrees));
+        Numerical numerical = new Numerical();
+        double beta_degrees = numerical.solveNewtonRaphson(equation, initBeta.in(degrees));
+
+        Angle beta = new Angle(beta_degrees, degrees);
+        return new ShockAngle(beta);
+    }
+
+    public ShockAngle beta(Mach upstreamMach, TurnAngle theta) {
+        return beta(upstreamMach, theta, Strength.WEAK_SHOCK);
     }
 
     public TurnAngle thetaMax(Mach upstreamMach) {
