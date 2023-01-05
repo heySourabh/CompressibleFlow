@@ -5,7 +5,7 @@
 
 package in.spbhat.physics;
 
-import in.spbhat.geometry.Angle;
+import in.spbhat.geometry.MachAngle;
 import in.spbhat.util.Formatter;
 
 import static in.spbhat.geometry.Angle.arcSin;
@@ -19,7 +19,7 @@ public class Mach {
         this.machNumber = abs(machNumber);
     }
 
-    public Mach(Angle machAngle) {
+    public Mach(MachAngle machAngle) {
         this(1.0 / sin(machAngle));
     }
 
@@ -27,11 +27,11 @@ public class Mach {
         Subsonic, Supersonic, Sonic
     }
 
-    public Angle machAngle() {
+    public MachAngle machAngle() {
         if (machRegime() == MachRegime.Subsonic) {
             throw new IllegalStateException("Cannot compute Mach angle for 'subsonic' flow: " + this);
         }
-        return arcSin(1.0 / machNumber);
+        return new MachAngle(arcSin(1.0 / machNumber));
     }
 
     public MachRegime machRegime() {

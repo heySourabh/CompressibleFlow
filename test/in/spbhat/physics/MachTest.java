@@ -5,7 +5,7 @@
 
 package in.spbhat.physics;
 
-import in.spbhat.geometry.Angle;
+import in.spbhat.geometry.MachAngle;
 import org.junit.jupiter.api.Test;
 
 import static in.spbhat.geometry.Angle.Units.degrees;
@@ -46,8 +46,8 @@ class MachTest {
     @Test
     void toStringTest() {
         assertEquals("Mach 2", new Mach(2).toString());
-        assertEquals("Mach 2", new Mach(new Angle(30, degrees)).toString());
+        assertEquals("Mach 2", new Mach(new MachAngle(30, degrees)).toString());
         assertEquals("Mach 2", new Mach(-2).toString());
-        assertEquals("Mach 2", new Mach(new Angle(-30, degrees)).toString());
+        assertEquals("Mach 2", new Mach(new MachAngle(-30, degrees)).toString());
     }
 }
