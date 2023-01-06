@@ -28,10 +28,10 @@ class SpecificHeatTest {
         double value = 123.25;
         SpecificHeat specificHeat = new SpecificHeat(value, J_kgK) {
         };
-        assertEquals(value / 4.1868, specificHeat.in(btu_lbmR));
+        assertEquals(value / 4186.8, specificHeat.in(btu_lbmR));
         specificHeat = new SpecificHeat(value, btu_lbmR) {
         };
-        assertEquals(value * 4.1868, specificHeat.in(J_kgK));
+        assertEquals(value * 4186.8, specificHeat.in(J_kgK));
     }
 
     @Test
