@@ -12,3 +12,6 @@
 
 # Other ignored files
 /TODOs.txt
+
+# Calling convensions & testing
+/src/in/spbhat/Main.java
