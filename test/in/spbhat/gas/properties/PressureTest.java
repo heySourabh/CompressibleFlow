@@ -94,6 +94,12 @@ class PressureTest {
     }
 
     @Test
+    void ratioTest() {
+        assertEquals(2, Pressure.ratio(new Pressure(10, Pa), new Pressure(5, Pa)));
+        assertEquals(0.5, Pressure.ratio(new Pressure(2, kPa), new Pressure(4000, Pa)));
+    }
+
+    @Test
     void toStringTest() {
         assertEquals("5 Pa", new Pressure(5, Pa).toString());
         assertEquals("1 kPa", new Pressure(1000, Pa).toString());

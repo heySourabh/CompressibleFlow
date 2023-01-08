@@ -39,6 +39,12 @@ public class Pressure {
         return pressure_Pa / units.conversion;
     }
 
+    public static double ratio(Pressure numerator, Pressure denominator) {
+        return numerator.units == denominator.units
+                ? numerator.value / denominator.value
+                : numerator.in(Pa) / denominator.in(Pa);
+    }
+
     public Pressure to(Units units) {
         return new Pressure(in(units), units);
     }
