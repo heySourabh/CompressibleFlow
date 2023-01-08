@@ -43,6 +43,11 @@ public abstract class SpecificHeat {
         return specificHeat_J_kgK / units.conversion;
     }
 
+    public SpecificHeat to(Units units) {
+        return new SpecificHeat(in(units), units) {
+        };
+    }
+
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;

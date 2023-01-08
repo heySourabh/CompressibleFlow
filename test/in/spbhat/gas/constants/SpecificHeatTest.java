@@ -42,6 +42,8 @@ class SpecificHeatTest {
         SpecificHeat specificHeat = new SpecificHeat(value, J_kgK) {
         };
         assertEquals("123.25 J/kg-K", specificHeat.toString());
+        assertEquals("0.0294378 btu/lbm-°R", specificHeat.to(btu_lbmR).toString());
+        assertEquals("22.9076 ft-lbf/lbm-°R", specificHeat.to(ftlbf_lbmR).toString());
         specificHeat = new SpecificHeat(value, btu_lbmR) {
         };
         assertEquals("123.25 btu/lbm-°R", specificHeat.toString());
