@@ -6,20 +6,26 @@
 package in.spbhat.gas.equations;
 
 import in.spbhat.gas.Gas;
+import in.spbhat.gas.properties.Pressure;
+import in.spbhat.gas.properties.Temperature;
 import in.spbhat.geometry.PrandtlMeyerAngle;
 import in.spbhat.physics.Mach;
+import in.spbhat.physics.Speed;
 import in.spbhat.util.Numerical;
 import in.spbhat.util.Numerical.Function;
 import in.spbhat.util.Numerical.Range;
 
 import static in.spbhat.geometry.Angle.Units.degrees;
 import static in.spbhat.geometry.Angle.arcTan;
+import static java.lang.Math.pow;
 
 public class ExpansionWaves {
     private final double gamma;
+    private final Gas gas;
 
     public ExpansionWaves(Gas gas) {
         this.gamma = gas.gamma();
+        this.gas = gas;
     }
 
     private static void validateSupersonic(Mach mach) {
@@ -44,5 +50,14 @@ public class ExpansionWaves {
         Range machRange = new Range(1, 100);
         double M = numerical.solveBisection(equation, machRange);
         return new Mach(M);
+    }
+
+    public Speed V2(Pressure p1, Pressure p2, Temperature T1, Speed V1) {
+        Speed a1 = gas.soundSpeed(T1);
+        double exponent = (gamma - 1) / 2 / gamma;
+        return V1.add(a1
+                .times(2)
+                .divide(gamma - 1)
+                .times(1 - pow(Pressure.ratio(p2, p1), exponent)));
     }
 }
