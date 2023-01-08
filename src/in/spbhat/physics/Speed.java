@@ -50,6 +50,10 @@ public class Speed {
         return new Speed(this.value + other.in(this.units), this.units);
     }
 
+    public Speed times(double scalar) {
+        return new Speed(this.value * scalar, this.units);
+    }
+
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;
