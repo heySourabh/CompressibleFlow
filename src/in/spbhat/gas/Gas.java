@@ -18,7 +18,7 @@ import static in.spbhat.gas.constants.MolarMass.Units.moles_gram;
 import static in.spbhat.gas.constants.SpecificHeat.Units.J_kgK;
 import static in.spbhat.gas.properties.Density.Units.kg_m3;
 import static in.spbhat.gas.properties.Pressure.Units.Pa;
-import static in.spbhat.gas.properties.Temperature.Units.K;
+import static in.spbhat.gas.properties.Temperature.Units.Kelvin;
 
 public interface Gas {
 
@@ -41,7 +41,7 @@ public interface Gas {
     }
 
     default Speed soundSpeed(Temperature temperature) {
-        double speed_m_s = Math.sqrt(gamma() * R().in(J_kgK) * temperature.in(K));
+        double speed_m_s = Math.sqrt(gamma() * R().in(J_kgK) * temperature.in(Kelvin));
         return new Speed(speed_m_s, Speed.Units.m_s);
     }
 

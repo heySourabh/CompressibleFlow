@@ -17,7 +17,7 @@ import static in.spbhat.gas.constants.MolarMass.Units.moles_gram;
 import static in.spbhat.gas.constants.SpecificHeat.Units.J_kgK;
 import static in.spbhat.gas.properties.Density.Units.kg_m3;
 import static in.spbhat.gas.properties.Pressure.Units.Pa;
-import static in.spbhat.gas.properties.Temperature.Units.K;
+import static in.spbhat.gas.properties.Temperature.Units.Kelvin;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GasTest {
@@ -58,8 +58,8 @@ class GasTest {
 
     @Test
     void soundSpeed_using_temperature() {
-        Temperature temperature = new Temperature(300, K);
-        double expectedSpeed = Math.sqrt(gas.gamma() * gas.R().in(J_kgK) * temperature.in(K));
+        Temperature temperature = new Temperature(300, Kelvin);
+        double expectedSpeed = Math.sqrt(gas.gamma() * gas.R().in(J_kgK) * temperature.in(Kelvin));
         assertEquals(expectedSpeed, gas.soundSpeed(temperature).in(Speed.Units.m_s));
     }
 

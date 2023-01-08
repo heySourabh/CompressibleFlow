@@ -9,7 +9,7 @@ import in.spbhat.util.Formatter;
 
 public class Temperature {
     public enum Units {
-        K("K") {
+        Kelvin("K") {
             @Override
             double toKelvin(double K) {
                 return K;
@@ -20,7 +20,7 @@ public class Temperature {
                 return K;
             }
         },
-        C("°C") {
+        Celsius("°C") {
             @Override
             double toKelvin(double C) {
                 return C + 273.15;
@@ -31,7 +31,7 @@ public class Temperature {
                 return K - 273.15;
             }
         },
-        F("°F") {
+        Fahrenheit("°F") {
             @Override
             double toKelvin(double F) {
                 return (F - 32) * 5.0 / 9.0 + 273.15;
@@ -42,7 +42,7 @@ public class Temperature {
                 return (K - 273.15) * 9.0 / 5.0 + 32;
             }
         },
-        R("°R") {
+        Rankine("°R") {
             @Override
             double toKelvin(double R) {
                 return R * 5.0 / 9.0;
@@ -91,11 +91,11 @@ public class Temperature {
     }
 
     public Temperature times(double ratio) {
-        return new Temperature(in(Units.K) * ratio, Units.K).to(this.units);
+        return new Temperature(in(Units.Kelvin) * ratio, Units.Kelvin).to(this.units);
     }
 
     public Temperature divide(double ratio) {
-        return new Temperature(in(Units.K) / ratio, Units.K).to(this.units);
+        return new Temperature(in(Units.Kelvin) / ratio, Units.Kelvin).to(this.units);
     }
 
     @Override

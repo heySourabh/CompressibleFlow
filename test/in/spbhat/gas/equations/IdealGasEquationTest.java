@@ -24,12 +24,12 @@ class IdealGasEquationTest {
 
     Pressure pressure = new Pressure(101325, Pa);
     Density density = new Density(1.125, kg_m3);
-    Temperature temperature = new Temperature(30, C);
+    Temperature temperature = new Temperature(30, Celsius);
 
     Gas fictitiousGas = new Gas() {
         @Override
         public R R() {
-            return new R(pressure.in(Pa) / temperature.in(K) / density.in(kg_m3), J_kgK);
+            return new R(pressure.in(Pa) / temperature.in(Kelvin) / density.in(kg_m3), J_kgK);
         }
 
         @Override
@@ -64,9 +64,9 @@ class IdealGasEquationTest {
     @Test
     void temperature() {
         IdealGasEquation eos = new IdealGasEquation(fictitiousGas);
-        assertEquals(temperature.in(K), eos.temperature(pressure, density).in(K));
-        assertEquals(temperature.in(C), eos.temperature(pressure, density).in(C));
-        assertEquals(temperature.in(F), eos.temperature(pressure, density).in(F));
-        assertEquals(temperature.in(R), eos.temperature(pressure, density).in(R));
+        assertEquals(temperature.in(Kelvin), eos.temperature(pressure, density).in(Kelvin));
+        assertEquals(temperature.in(Celsius), eos.temperature(pressure, density).in(Celsius));
+        assertEquals(temperature.in(Fahrenheit), eos.temperature(pressure, density).in(Fahrenheit));
+        assertEquals(temperature.in(Rankine), eos.temperature(pressure, density).in(Rankine));
     }
 }

@@ -13,8 +13,8 @@ import in.spbhat.physics.Mach;
 import org.junit.jupiter.api.Test;
 
 import static in.spbhat.gas.properties.Pressure.Units.*;
-import static in.spbhat.gas.properties.Temperature.Units.C;
-import static in.spbhat.gas.properties.Temperature.Units.K;
+import static in.spbhat.gas.properties.Temperature.Units.Celsius;
+import static in.spbhat.gas.properties.Temperature.Units.Kelvin;
 import static in.spbhat.physics.Mach.MachRegime.*;
 import static in.spbhat.util.Formatter.doubleToString;
 import static java.lang.Math.pow;
@@ -58,7 +58,7 @@ class IsentropicFlowTest {
 
     @Test
     void T2() {
-        assertEquals("316.042K", isentropicFlow.T2(new Temperature(300, K), 1.2).toString());
+        assertEquals("316.042K", isentropicFlow.T2(new Temperature(300, Kelvin), 1.2).toString());
     }
 
     @Test
@@ -72,13 +72,13 @@ class IsentropicFlowTest {
     @Test
     void T() {
         assertEquals(format("%s°C", doubleToString((30 + 273.15) / 1.032 - 273.15)),
-                isentropicFlow.T(new Mach(0.4), new Temperature(30, C)).toString());
+                isentropicFlow.T(new Mach(0.4), new Temperature(30, Celsius)).toString());
         assertEquals(format("%s°C", doubleToString((30 + 273.15) / 1.578 - 273.15)),
-                isentropicFlow.T(new Mach(1.7), new Temperature(30, C)).toString());
+                isentropicFlow.T(new Mach(1.7), new Temperature(30, Celsius)).toString());
         assertEquals(format("%s°C", doubleToString((30 + 273.15) / 1.2 - 273.15)),
-                isentropicFlow.T(new Mach(1), new Temperature(30, C)).toString());
+                isentropicFlow.T(new Mach(1), new Temperature(30, Celsius)).toString());
         assertEquals("30°C",
-                isentropicFlow.T(new Mach(0), new Temperature(30, C)).toString());
+                isentropicFlow.T(new Mach(0), new Temperature(30, Celsius)).toString());
     }
 
     @Test
