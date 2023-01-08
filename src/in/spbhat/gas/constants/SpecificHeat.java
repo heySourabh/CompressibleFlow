@@ -10,7 +10,8 @@ import in.spbhat.util.Formatter;
 public abstract class SpecificHeat {
     public enum Units {
         J_kgK(1.0, "J/kg-K"),
-        btu_lbmR(4186.8, "btu/lbm-°R");
+        btu_lbmR(4186.8, "btu/lbm-°R"),
+        ftlbf_lbmR(5.380320456, "ft-lbf/lbm-°R");
 
         private final double conversion;
         private final String unitStr;

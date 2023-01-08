@@ -7,8 +7,7 @@ package in.spbhat.gas.constants;
 
 import org.junit.jupiter.api.Test;
 
-import static in.spbhat.gas.constants.SpecificHeat.Units.J_kgK;
-import static in.spbhat.gas.constants.SpecificHeat.Units.btu_lbmR;
+import static in.spbhat.gas.constants.SpecificHeat.Units.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,6 +31,9 @@ class SpecificHeatTest {
         specificHeat = new SpecificHeat(value, btu_lbmR) {
         };
         assertEquals(value * 4186.8, specificHeat.in(J_kgK));
+        specificHeat = new SpecificHeat(value, ftlbf_lbmR) {
+        };
+        assertEquals(value * 5.380320456, specificHeat.in(J_kgK));
     }
 
     @Test
@@ -43,5 +45,8 @@ class SpecificHeatTest {
         specificHeat = new SpecificHeat(value, btu_lbmR) {
         };
         assertEquals("123.25 btu/lbm-°R", specificHeat.toString());
+        specificHeat = new SpecificHeat(value, ftlbf_lbmR) {
+        };
+        assertEquals("123.25 ft-lbf/lbm-°R", specificHeat.toString());
     }
 }
