@@ -46,6 +46,10 @@ public class Speed {
         return new Speed(in(units), units);
     }
 
+    public Speed add(Speed other) {
+        return new Speed(this.value + other.in(this.units), this.units);
+    }
+
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;
