@@ -54,6 +54,10 @@ public class Speed {
         return new Speed(this.value * scalar, this.units);
     }
 
+    public Speed divide(double scalar) {
+        return new Speed(this.value / scalar, this.units);
+    }
+
     @Override
     public String toString() {
         return Formatter.doubleToString(this.value) + " " + this.units;

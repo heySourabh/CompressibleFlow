@@ -73,6 +73,12 @@ class SpeedTest {
     }
 
     @Test
+    void divideTest() {
+        assertEquals(new Speed(22, m_s).toString(), new Speed(11, m_s).divide(0.5).toString());
+        assertEquals(new Speed(10, ft_s).toString(), new Speed(20, ft_s).divide(2).toString());
+    }
+
+    @Test
     void toStringTest() {
         // m_s, km_h, ft_s
         assertEquals("311.797 m/s", new Speed(-311.797, m_s).toString());
