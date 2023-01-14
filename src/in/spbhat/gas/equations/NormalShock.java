@@ -106,4 +106,14 @@ public class NormalShock {
         double M1 = numerical.solveBisection(eqn, new Range(1, 150));
         return new Mach(M1);
     }
+
+    public Mach M1_using_p02_by_p01(double p02_by_p01) {
+        if (p02_by_p01 > 1) {
+            throw new IllegalArgumentException("Normal shock: p02/p01 must be less than or equal to 1");
+        }
+        Function eqn = M1 -> p02_by_p01(new Mach(M1)) - p02_by_p01;
+        Numerical numerical = new Numerical();
+        double M1 = numerical.solveBisection(eqn, new Range(1, 150));
+        return new Mach(M1);
+    }
 }

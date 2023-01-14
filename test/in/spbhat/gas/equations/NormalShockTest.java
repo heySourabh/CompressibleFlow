@@ -102,4 +102,13 @@ class NormalShockTest {
         var error = assertThrows(IllegalArgumentException.class, () -> ns.M1_using_p02_by_p1(1.8));
         assertEquals("Normal shock: p02/p1 must be greater than or equal to 1.89293", error.getMessage());
     }
+
+    @Test
+    void M1_using_p02_by_p01() {
+        var error = assertThrows(IllegalArgumentException.class, () -> ns.M1_using_p02_by_p01(1.1));
+        assertEquals("Normal shock: p02/p01 must be less than or equal to 1", error.getMessage());
+        assertEquals("Mach 1.42", ns.M1_using_p02_by_p01(0.953063).toString());
+        assertEquals("Mach 5", ns.M1_using_p02_by_p01(0.0617163).toString());
+        assertEquals(1, ns.M1_using_p02_by_p01(1).machNumber, 1e-5);
+    }
 }
