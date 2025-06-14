@@ -71,7 +71,7 @@ public class Numerical {
             double c = (a + b) / 2.0;
             double fc = f.eval(c);
 
-            if (Math.abs(fc) < 1e-15 || (b - a) / 2.0 <= tolerance * b) {
+            if ((b - a) / 2.0 <= tolerance) {
                 return c;
             }
 
